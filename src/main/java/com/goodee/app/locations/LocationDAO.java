@@ -1,4 +1,4 @@
-package com.goodee.app.departments;
+package com.goodee.app.locations;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,45 +12,41 @@ import org.springframework.stereotype.Repository;
 import com.goodee.app.util.DBConnection;
 
 @Repository
-public class DepartmentDAO {
+public class LocationDAO {
 	
 	@Autowired
 	private DBConnection dbConnection;
 	
-	
-	public List<DepartmentDTO> getLIst() throws Exception{
+	public List<LocationDTO> getList() throws Exception{
 		Connection con = dbConnection.getConnection();
 		
-		// SQL (Query)문 작성
-		String sql = "SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_ID ASC";
+		String sql = "SELECT * FROM LOCATIONS ORDER BY LOCATION_ID ASC";
 		
-		// 작성한 SQL문을 미리 서버로 전송하는 것
 		PreparedStatement st = con.prepareStatement(sql);
 		
-		// 최종 전송 및 결과 처리
 		ResultSet rs = st.executeQuery();
 		
-		ArrayList<DepartmentDTO> dtos = new ArrayList<DepartmentDTO>();
+		ArrayList<LocationDTO> dtos = new ArrayList<LocationDTO>();
 		
 		while(rs.next()) {
-			DepartmentDTO dto = new DepartmentDTO();
-			int id = rs.getInt("DEPARTMENT_ID");
-			String name = rs.getString("DEPARTMENT_NAME");
+			LocationDTO dto = new LocationDTO();
 			
-			dto.setDepartment_id(id);
-			dto.setDepartment_name(name);
-			dto.setManager_id(rs.getLong("MANAGER_ID"));
 			dto.setLocation_id(rs.getInt("LOCATION_ID"));
+			dto.setStreet_address(rs.getString("STREET_ADDRESS"));
+			dto.setPostal_code(rs.getString("POSTAL_CODE"));
+			dto.setCity(rs.getString("CITY"));
+			dto.setState_province(rs.getString("STATE_PROVINCE"));
+			dto.setCountry_id(rs.getString("COUNTRY_ID"));
 			
 			dtos.add(dto);
 		}
 		
-		//연결한 자원을 해제
 		rs.close();
 		st.close();
 		con.close();
 		
 		return dtos;
+		
 	}
 
 }

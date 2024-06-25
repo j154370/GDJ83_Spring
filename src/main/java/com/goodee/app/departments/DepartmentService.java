@@ -1,5 +1,7 @@
 package com.goodee.app.departments;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +11,8 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentDAO dao;
 	
-	public void getList() throws Exception{
-		dao.getLIst();
+	public List<DepartmentDTO> getList() throws Exception{
+		return dao.getLIst();
 	}
 
 }
