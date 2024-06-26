@@ -16,5 +16,13 @@ public class LocationService {
 		return dao.getList();
 		
 	}
+	
+	public LocationDTO getDetail(int num) throws Exception{
+		return dao.getDetail(num);
+	}
+	
+	public int add(LocationDTO dto) throws Exception{
+		return dao.add(dto);
+	}
 
 }

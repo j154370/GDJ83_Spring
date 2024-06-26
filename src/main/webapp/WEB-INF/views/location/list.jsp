@@ -11,31 +11,36 @@
 <body>
 	<h1>Location list page</h1>
 	
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>location_id</th>
-				<th>street_address</th>
-				<th>postal_code</th>
-				<th>city</th>
-				<th>state_province</th>
-				<th>country_id</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<c:forEach items="${requestScope.list }" var = "dto">
+	<div>
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>${pageScope.dto.location_id }</td>
-					<td>${pageScope.dto.street_address }</td>
-					<td>${pageScope.dto.postal_code }</td>
-					<td>${pageScope.dto.city }</td>
-					<td>${pageScope.dto.state_province }</td>
-					<td>${pageScope.dto.country_id }</td>
+					<th>location_id</th>
+					<th>street_address</th>
+					<th>postal_code</th>
+					<th>city</th>
+					<th>state_province</th>
+					<th>country_id</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			
+			<tbody>
+				<c:forEach items="${requestScope.list }" var = "dto">
+					<tr>
+						<td>${pageScope.dto.location_id }</td>
+						<td>${pageScope.dto.street_address }</td>
+						<td>${pageScope.dto.postal_code }</td>
+						<td><a href="detail?location_id=${pageScope.dto.location_id }">${pageScope.dto.city }</a></td>
+						<td>${pageScope.dto.state_province }</td>
+						<td>${pageScope.dto.country_id }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div>
+		<a href="/location/add " class="btn btn-outline-primary">location 등록</a>
+		</div>
+	</div>
 	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>	
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

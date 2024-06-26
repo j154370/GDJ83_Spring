@@ -52,5 +52,94 @@ public class DepartmentDAO {
 		
 		return dtos;
 	}
+	
+	public DepartmentDTO getDetail(int num) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		// ? 처리
+		st.setInt(1, num);
+		
+		ResultSet rs = st.executeQuery();
+		
+		DepartmentDTO dto = null;
+		if(rs.next()) {
+			dto = new DepartmentDTO();
+			
+			dto.setDepartment_id(rs.getInt("DEPARTMENT_ID"));
+			dto.setDepartment_name(rs.getString("DEPARTMENT_NAME"));
+			dto.setManager_id(rs.getLong("MANAGER_ID"));
+			dto.setLocation_id(rs.getInt("LOCATION_ID"));	
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return dto;
+	}
+	
+	public int add(DepartmentDTO dto) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "INSERT INTO DEPARTMENTS "
+				+ " (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID) " 
+				+ " VALUES (DEPARTMENTS_SEQ.NEXTVAL,?,?,?)";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, dto.getDepartment_name());
+		st.setLong(2, dto.getManager_id());
+		st.setInt(3, dto.getLocation_id());
+		
+		// insert문은 executeUpdate 메서드를 사용
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	public int delete(DepartmentDTO dto) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "DELETE DEPARTMENTS WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, dto.getDepartment_id());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	public int update(DepartmentDTO dto) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME=?, MANAGER_ID=?, LOCATION_ID=? "
+				+ " WHERE DEPARTMENT_ID=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, dto.getDepartment_name());
+		st.setLong(2, dto.getManager_id());
+		st.setInt(3, dto.getLocation_id());
+		st.setInt(4, dto.getDepartment_id());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
 
 }
