@@ -1,6 +1,7 @@
 package com.goodee.app.departments;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,10 @@ public class DepartmentController {
 		List<DepartmentDTO> dtos = service.getList();
 		
 		model.addAttribute("list", dtos);
+		
+		List<Map<String, Object>> info = service.getInfo();
+		
+		model.addAttribute("info", info);
 		
 		// return을 생략하면 url 주소와 일치하는 jsp 값을 자동으로 리턴한다.
 	}

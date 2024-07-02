@@ -14,6 +14,15 @@
 </head>
 <body>
 	<h1>부서목록 페이지</h1>
+	
+	<div class = "row">
+		<c:forEach items="${requestScope.info }" var = "m">
+			<h3>${pageScope.m.id }</h3>
+			<h3>${pageScope.m.sum }</h3>
+			<h3>${pageScope.m.avg }</h3>
+		</c:forEach>
+	
+	</div>
 
 
 	<div>
