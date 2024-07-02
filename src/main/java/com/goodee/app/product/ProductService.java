@@ -18,4 +18,16 @@ public class ProductService {
 	public ProductDTO getDetail(ProductDTO dto) throws Exception{
 		return dao.getDetail(dto);
 	}
+	
+	public int add(ProductDTO dto) throws Exception{
+		return dao.add(dto);
+	}
+	
+	public int delete(ProductDTO dto) throws Exception{
+		return dao.delete(dto);
+	}
+	
+	public int update(ProductDTO dto) throws Exception{
+		return dao.update(dto);
+	}
 }

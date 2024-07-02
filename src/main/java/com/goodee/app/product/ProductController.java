@@ -43,8 +43,46 @@ public class ProductController {
 	public void add() {
 	}
 	
-	@RequestMapping(value = "list", method = RequestMethod.POST)
-	public void add2() {
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String add(Model model, ProductDTO dto) throws Exception{
+		int result = service.add(dto);
 		
+		String path = "commons/message";
+		
+		if(result > 0) {
+			path = "redirect:/product/list";
+		} else {
+			model.addAttribute("result", "데이터 추가에 실패하였습니다.");
+			model.addAttribute("url", "/product/list");
+		}
+		return path;
+	}
+	
+	@RequestMapping("delete")
+	public String delete(Model model, ProductDTO dto) throws Exception{
+		int result = service.delete(dto);
+		
+		String path = "commons/message";
+		
+		if(result > 0) {
+			path = "redirect:/product/list";
+		}else {
+			model.addAttribute("result", "데이터 삭제에 실패하였습니다.");
+			model.addAttribute("url", "/product/list");
+		}
+		
+		return path;
+	}
+	
+	@RequestMapping("update")
+	public void update() {
+		
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(Model model, ProductDTO dto) throws Exception{
+		int result = service.update(dto);
+		
+		return "redirect:/product/list";
 	}
 }

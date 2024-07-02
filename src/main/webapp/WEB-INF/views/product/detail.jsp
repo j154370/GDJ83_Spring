@@ -18,6 +18,9 @@
 	<h3>${requestScope.dto.product_rate }</h3>
 	<h3>${requestScope.dto.product_ex }</h3>
 	
+	<a href="/product/delete?product_num=${requestScope.dto.product_num }">삭제</a>
+	<a href="/product/update?product_num=${requestScope.dto.product_num }">수정</a>
+	
 
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
 </body>

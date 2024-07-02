@@ -20,7 +20,7 @@ public class ProductDAO {
 	public List<ProductDTO> getList() throws Exception{
 		Connection con = dbConnection.getConnection();
 		
-		String sql = "SELECT * FROM PRODUCT_INFO";
+		String sql = "SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM ASC";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
@@ -80,6 +80,43 @@ public class ProductDAO {
 		Connection con = dbConnection.getConnection();
 		
 		String sql = "INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL,?,?,?)";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, dto.getProduct_name());
+		st.setDouble(2, dto.getProduct_rate());
+		st.setString(3, dto.getProduct_ex());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	public int delete(ProductDTO dto) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "DELETE PRODUCT_INFO WHERE PRODUCT_NUM =?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, dto.getProduct_num());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	public int update(ProductDTO dto) throws Exception{
+		Connection con = dbConnection.getConnection();
+		
+		String sql = "UPDATE PRODUCT_INFO SET PRODUCT_NAME =?, PRODUCT_RATE =?, PRODUCT_EX =? "
+				+ " WHERE PRODUCT_NUM = ?";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
