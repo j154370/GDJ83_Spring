@@ -75,7 +75,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("update")
-	public void update() {
+	public void update() throws Exception{
 		
 	}
 	
