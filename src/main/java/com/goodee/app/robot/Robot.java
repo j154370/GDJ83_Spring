@@ -4,14 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Robot {
 	
-	@Autowired
+	//@Autowired
 	private Arm ra;
 	
-	@Autowired
+	//@Autowired
 	private Arm la;
+	
+	private String company;
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
 
 	public Arm getRa() {
 		return ra;

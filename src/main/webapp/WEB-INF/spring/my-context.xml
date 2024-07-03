@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 매개변수가 들어간 생성자 객체를 만드는 경우 -->
+	<bean class="com.goodee.app.robot.Wheel" id="wheel">
+		<!-- 1. index로 매개변수를 구분 
+		<constructor-arg index="0" value="50"></constructor-arg>
+		<constructor-arg index="1" value="Apple"></constructor-arg>
+		<constructor-arg index="2" value="2"></constructor-arg> 
+		-->
+		<!-- 2. 매개변수의 이름으로 구분하는 경우 -->
+		<constructor-arg name="size" value="50"></constructor-arg>
+		<constructor-arg name="brand" value="Apple"></constructor-arg>
+		<constructor-arg name="count" value="2"></constructor-arg>
+	</bean>
+	
+		
+	<bean class="com.goodee.app.robot.LeftArm" id="leftArm"></bean>
+	<bean class="com.goodee.app.robot.RightArm" id="rightArm"></bean>
+	<bean class="com.goodee.app.robot.Robot" id="robot">
+	<!-- ref는 참조 변수, value는 primitive type 변수 -->
+		<property name="la" ref="leftArm"></property>
+		<property name="ra" ref="rightArm"></property>
+		<property name="company" value="Google"></property>
+	</bean>
+
+</beans>
