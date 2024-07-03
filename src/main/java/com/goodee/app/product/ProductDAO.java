@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,65 +16,20 @@ import com.goodee.app.util.DBConnection;
 public class ProductDAO {
 	
 	@Autowired
-	private DBConnection dbConnection;
-
+	private SqlSession sqlSession;
+	
+	private final String NAMESPACE = "com.goodee.app.product.ProductDAO.";
+	
+	
 	public List<ProductDTO> getList() throws Exception{
-		Connection con = dbConnection.getConnection();
 		
-		String sql = "SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM ASC";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		ResultSet rs = st.executeQuery();
-		
-		ArrayList<ProductDTO> dtos = new ArrayList<ProductDTO>();
-		
-		while(rs.next()) {
-			ProductDTO dto = new ProductDTO();
-			
-			dto.setProduct_num(rs.getInt("PRODUCT_NUM"));
-			dto.setProduct_name(rs.getString("PRODUCT_NAME"));
-			dto.setProduct_rate(rs.getDouble("PRODUCT_RATE"));
-			dto.setProduct_ex(rs.getString("PRODUCT_EX"));
-			
-			dtos.add(dto);
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return dtos;
+		return sqlSession.selectList(NAMESPACE + "getList");
 		
 	}
 	
 	public ProductDTO getDetail(ProductDTO dto) throws Exception{
-		Connection con = dbConnection.getConnection();
 		
-		String sql = "SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM =?";
-		
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		st.setInt(1, dto.getProduct_num());
-		
-		ResultSet rs = st.executeQuery();
-		
-		ProductDTO dto2 = null;
-		
-		if(rs.next()) {
-			dto2 = new ProductDTO();
-			
-			dto2.setProduct_num(rs.getInt("PRODUCT_NUM"));
-			dto2.setProduct_name(rs.getString("PRODUCT_NAME"));
-			dto2.setProduct_rate(rs.getDouble("PRODUCT_RATE"));
-			dto2.setProduct_ex(rs.getString("PRODUCT_EX"));
-		}
-		
-		rs.close();
-		st.close();
-		con.close();
-		
-		return dto2;
+		return sqlSession.selectOne(NAMESPACE + "getDetail", dto);
 	}
 	
 	public int add(ProductDTO dto) throws Exception{
