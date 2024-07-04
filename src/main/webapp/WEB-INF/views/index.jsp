@@ -12,6 +12,13 @@
 	<c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<div class="container mt-5">
 		<div class="row justify-content-center">
+			
+			<c:if test="${not empty dto}">
+				<div>
+					<h3>${sessionScope.dto.user_name}님 환영해요</h3>
+				</div>			
+			</c:if>
+			
 			<div id="carouselExampleAutoplaying" class="carousel slide col-md-6"
 				data-bs-ride="carousel">
 				<div class="carousel-inner">

@@ -5,23 +5,23 @@
   
   <mapper namespace="com.goodee.app.product.ProductDAO">
   
-  	<select id="getList" resultType="com.goodee.app.product.ProductDTO">
+  	<select id="getList" resultType="ProductDTO">
   		SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM ASC
   	</select>
 
-  	<select id="getDetail" resultType="com.goodee.app.product.ProductDTO" parameterType="com.goodee.app.product.ProductDTO">
+  	<select id="getDetail" resultType="ProductDTO" parameterType="ProductDTO">
   		SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM = #{product_num}
   	</select>
   	
-  	<insert id="add" parameterType="com.goodee.app.product.ProductDTO">
+  	<insert id="add" parameterType="ProductDTO">
   		INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL,#{product_name},#{product_rate},#{product_ex})
   	</insert>
   	
-  	<delete id="delete" parameterType="com.goodee.app.product.ProductDTO">
+  	<delete id="delete" parameterType="ProductDTO">
   		DELETE PRODUCT_INFO WHERE PRODUCT_NUM =#{product_num}
   	</delete>
   	
-  	<update id="update" parameterType="com.goodee.app.product.ProductDTO">
+  	<update id="update" parameterType="ProductDTO">
   		UPDATE PRODUCT_INFO SET PRODUCT_NAME =#{product_name}, PRODUCT_RATE =#{product_rate}, PRODUCT_EX =#{product_ex}
   		WHERE PRODUCT_NUM = #{product_num}
   	</update>
