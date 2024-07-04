@@ -39,7 +39,7 @@ public class MemberController {
 		return path;
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "login", method = RequestMethod.GET)   // required = false의 뜻은 쿠키 안에 값이 없어도 괜찮다는 설정(이걸 안하면 Null이 들어올 때 에러가 발생한다)
 	public void login(Model model, @CookieValue(name="remember", required = false, defaultValue = "") String value) throws Exception{
 		model.addAttribute("id", value);
 	}
