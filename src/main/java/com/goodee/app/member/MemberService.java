@@ -30,4 +30,15 @@ public class MemberService {
 		return result;
 		
 	}
+	
+	public int update(MemberDTO dto) throws Exception{
+		
+		return dao.update(dto);
+	}
+	
+	public int delete(MemberDTO dto) throws Exception{
+		
+		return dao.delete(dto);
+	}
+	
 }

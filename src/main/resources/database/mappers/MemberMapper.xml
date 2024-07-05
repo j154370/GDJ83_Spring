@@ -13,5 +13,15 @@
   	<select id="login" resultType="MemberDTO" parameterType="MemberDTO">
   		SELECT * FROM MEMBER_INFO WHERE USER_ID = #{user_id}
   	</select>
+  	
+  	<update id="update" parameterType="MemberDTO">
+  		UPDATE MEMBER_INFO SET USER_NAME =#{user_name}, USER_PHONE =#{user_phone}, USER_EMAIL =#{user_email},
+  		USER_ADDRESS = #{user_address}
+  		WHERE USER_ID = #{user_id}
+  	</update>
+  	
+  	<delete id="delete" parameterType="MemberDTO">
+  		DELETE MEMBER_INFO WHERE USER_ID =#{user_id}
+  	</delete>
  
   </mapper>
