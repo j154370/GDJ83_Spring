@@ -6,7 +6,8 @@
   <configuration>
   	<typeAliases>
   		<typeAlias type="com.goodee.app.product.ProductDTO" alias="productDTO"/>
-  		<typeAlias type="com.goodee.app.member.MemberDTO" alias="MemberDTO"/>		
+  		<typeAlias type="com.goodee.app.member.MemberDTO" alias="MemberDTO"/>
+  		<typeAlias type="com.goodee.app.account.AccountDTO" alias="AccountDTO"/>		
   	</typeAliases>
   
   

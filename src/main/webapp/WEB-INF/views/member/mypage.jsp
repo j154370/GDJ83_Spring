@@ -23,7 +23,7 @@
 	
 	<a href="/member/update">회원 정보 수정</a>
 	<form action="/member/delete" method ="post">
-		<button type="submit">회원탈퇴</button>
+		<button type="submit" class = "btn btn-danger">회원탈퇴</button>
 	</form>
 
 

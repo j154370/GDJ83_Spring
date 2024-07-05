@@ -18,6 +18,7 @@
 	<h3>${requestScope.dto.product_rate }</h3>
 	<h3>${requestScope.dto.product_ex }</h3>
 	
+	<a href="">상품 가입</a>
 	<a href="/product/delete?product_num=${requestScope.dto.product_num }">삭제</a>
 	<a href="/product/update?product_num=${requestScope.dto.product_num }">수정</a>
 	
