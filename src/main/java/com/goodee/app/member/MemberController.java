@@ -1,5 +1,7 @@
 package com.goodee.app.member;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -62,9 +64,10 @@ public class MemberController {
 		}
 
 		// 로그인 관련 코드
-		dto = service.login(dto);
-		if (dto != null) {
-			session.setAttribute("dto", dto);
+		//dto = service.login(dto);
+		Map<String, Object> map = service.login(dto);
+		if (map != null) {
+			session.setAttribute("dto", map);
 		} else {
 
 		}

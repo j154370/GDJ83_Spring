@@ -5,10 +5,15 @@
   
   <mapper namespace="com.goodee.app.account.AccountDAO">
   	
-  	<insert id="add" parameterType="MemberDTO">
+  	<insert id="add" parameterType="AccountDTO">
   		INSERT INTO ACCOUNT_INFO (ACCOUNT_NUM, USER_ID, PRODUCT_NUM, BALANCE, ACCOUNT_DATE)
-		VALUES (#{account_num}, #{user_id}, #{product_num}, #{balance}, SYSDATE)
+		VALUES (#{account_num}, #{user_id}, #{product_num}, 0, SYSDATE)
   	</insert>
+  	
+  	<select id = "list" resultType="AccountDTO" parameterType="MemberDTO">
+  		SELECT ACCOUNT_NUM, BALANCE FROM ACCOUNT_INFO
+  		WHERE USER_ID = #{user_id}
+  	</select>
   	
  
   </mapper>
