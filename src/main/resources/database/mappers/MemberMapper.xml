@@ -10,9 +10,31 @@
 		VALUES (#{user_id}, #{user_name}, #{user_phone}, #{user_pw}, #{user_email}, #{user_address})
   	</insert>
   	
-  	<select id="login" resultType="MemberDTO" parameterType="MemberDTO">
-  		SELECT * FROM MEMBER_INFO WHERE USER_ID = #{user_id}
+  	<select id="login" parameterType="MemberDTO" resultMap="loginResult">
+  		SELECT * FROM MEMBER_INFO mi
+		LEFT JOIN ACCOUNT_INFO ai 
+		ON ai.USER_ID = mi.USER_ID
+		WHERE mi.USER_ID = #{user_id}
   	</select>
+  	
+  	<resultMap type="MemberDTO" id="loginResult">
+  		<!-- primary key 용도 -->
+  		<id column="USER_ID" property="user_id"/>
+  		<!-- column = "컬럼 명", property = "setter의 이름 -->
+  		<result column="USER_NAME" property="user_name"/>
+  		<result column="USER_PHONE" property="user_phone"/>
+  		<result column="USER_PW" property="user_pw"/>
+  		<result column="USER_EMAIL" property="user_email"/>
+  		<result column="USER_ADDRESS" property="user_address"/>
+  		<!-- 1 : N의 관계 -->
+  		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">
+  			<id column ="ACCOUNT_NUM" property="account_num" />
+  			<result column="PRODUCT_NUM" property="product_num" />
+  			<result column="BALANCE" property="balance" />
+  			<result column="ACCOUNT_DATE" property="account_date" />
+  		</collection>
+  	
+  	</resultMap>
   	
   	<update id="update" parameterType="MemberDTO">
   		UPDATE MEMBER_INFO SET USER_NAME =#{user_name}, USER_PHONE =#{user_phone}, USER_EMAIL =#{user_email},

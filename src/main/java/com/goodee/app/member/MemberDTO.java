@@ -1,5 +1,9 @@
 package com.goodee.app.member;
 
+import java.util.List;
+
+import com.goodee.app.account.AccountDTO;
+
 public class MemberDTO {
 	
 	private String user_id;     	// 유저 아이디, PK키
@@ -8,9 +12,16 @@ public class MemberDTO {
 	private String user_pw;			// 비밀번호
 	private String user_email;		// 이메일
 	private String user_address;	// 주소
+	private List<AccountDTO> dtos;
 	
 	
 	
+	public List<AccountDTO> getDtos() {
+		return dtos;
+	}
+	public void setDtos(List<AccountDTO> dtos) {
+		this.dtos = dtos;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

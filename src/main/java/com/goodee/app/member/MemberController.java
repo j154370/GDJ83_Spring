@@ -65,9 +65,9 @@ public class MemberController {
 
 		// 로그인 관련 코드
 		//dto = service.login(dto);
-		Map<String, Object> map = service.login(dto);
-		if (map != null) {
-			session.setAttribute("dto", map);
+		dto = service.login(dto);
+		if (dto != null) {
+			session.setAttribute("dto", dto);
 		} else {
 
 		}

@@ -22,10 +22,11 @@ public class AccountDAO {
 		return sqlSession.insert(NAMESPACE + "add", dto);
 	}
 	
-	public List<AccountDTO> list(MemberDTO dto)throws Exception{
-		
-		return sqlSession.selectList(NAMESPACE + "list", dto);
-		
-	}
+//	마이페이지 조회를 할 때 새로 갱신한다면 이 코드가 필요하고, 로그인을 할 때 자동으로 만들겠다면 이 코드는 필요가 없다.
+//	public List<AccountDTO> list(MemberDTO dto)throws Exception{
+//		
+//		return sqlSession.selectList(NAMESPACE + "list", dto);
+//		
+//	}
 
 }
