@@ -24,20 +24,24 @@ public class AccountDAO {
 		return sqlSession.selectOne(NAMESPACE + "detail", dto);
 	}
 	
-	public void transferMy() throws Exception{
+	public int transferMy(TradeDTO tradeDTO) throws Exception{
 		
+		return sqlSession.insert(NAMESPACE + "transferMy", tradeDTO);
 	}
 	
-	public void transferYou() throws Exception{
+	public int transferYou(TradeDTO tradeDTO) throws Exception{
 		
+		return sqlSession.insert(NAMESPACE + "transferMy", tradeDTO);
 	}
 	
-	public void updateMy() throws Exception{
+	public int updateMy(AccountDTO dto) throws Exception{
 		
+		return sqlSession.update(NAMESPACE + "updateMy", dto);
 	}
 	
-	public void updateYou() throws Exception{
+	public int updateYou(AccountDAO dto) throws Exception{
 		
+		return sqlSession.update(NAMESPACE + "updateYou", dto);
 	}
 
 	

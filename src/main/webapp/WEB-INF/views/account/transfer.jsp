@@ -17,6 +17,8 @@
 		</div>
 		<div class="row">
 			<form action="/account/transfer" method="post">
+				<input type="hidden" name="account_num" value="${dto.account_num }">
+			
 				<div class="mb-3">
 					<label for="account_num" class="form-label">계좌 번호</label>
 					<input type="text" class="form-control" id="account_num" name="account_num">

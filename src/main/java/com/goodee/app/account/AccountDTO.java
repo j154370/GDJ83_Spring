@@ -14,8 +14,15 @@ public class AccountDTO {
 	private Date account_date;
 	private MemberDTO memberDTO;
 	private ProductDTO productDTO;
+	private TradeDTO tradeDTO;
 	
 	
+	public TradeDTO getTradeDTO() {
+		return tradeDTO;
+	}
+	public void setTradeDTO(TradeDTO tradeDTO) {
+		this.tradeDTO = tradeDTO;
+	}
 	public MemberDTO getMemberDTO() {
 		return memberDTO;
 	}

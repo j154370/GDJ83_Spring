@@ -32,12 +32,12 @@
 
   	
   	<!-- 내 거래내역 쿼리 -->
-  	<insert id="transferMy" parameterType="com.goodee.app.account.TradeDTO">
+  	<insert id="transferMy" parameterType="AccountDTO">
   		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
 		VALUES (TRADE_SEQ.NEXTVAL, #{account_num}, #{balance}, '출금', #{trade_amount}, SYSDATE)
   	</insert>
   	<!-- 상대방 거래내역 쿼리 -->
-  	<insert id="transferYou" parameterType="com.goodee.app.account.TradeDTO">
+  	<insert id="transferYou" parameterType="AccountDTO">
   		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
 		VALUES (TRADE_SEQ.NEXTVAL, #{account_num}, #{balance}, '입금', #{trade_amount}, SYSDATE)
   	</insert>
