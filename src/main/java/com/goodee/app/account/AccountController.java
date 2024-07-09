@@ -39,13 +39,25 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.GET)
-	public void transfer() throws Exception{
+	public void transfer(AccountDTO dto, Model model) throws Exception{
+		dto = service.detail(dto);
 		
+		model.addAttribute("dto", dto);
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.POST)
-	public void transfer2() throws Exception{
+	public String transfer(TradeDTO tradeDTO, AccountDTO accountDTO ) throws Exception{
 		
+		int result = service.transfer(tradeDTO, accountDTO);
+		
+		String url = "";
+		if(result == 4) {
+			
+		}else {
+			
+		}
+		
+		return "redirect:/member/mypage";
 	}
 
 	

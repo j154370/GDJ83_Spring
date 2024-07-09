@@ -17,11 +17,12 @@
 		</div>
 		<div class="row">
 			<form action="/account/transfer" method="post">
-				<input type="hidden" name="account_num" value="${dto.account_num }">
+				<input type="hidden" name="account_num_me" value="${dto.account_num }">
+				<input type="hidden" name="balance" value="${dto.balance }">
 			
 				<div class="mb-3">
-					<label for="account_num" class="form-label">계좌 번호</label>
-					<input type="text" class="form-control" id="account_num" name="account_num">
+					<label for="account_num_you" class="form-label">계좌 번호</label>
+					<input type="text" class="form-control" id="account_num_you" name="account_num_you">
 				</div>
 				<div class="mb-3">
 					<label for="trade_amount" class="form-label">이체 금액</label>

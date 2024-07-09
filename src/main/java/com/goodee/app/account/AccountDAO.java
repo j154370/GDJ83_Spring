@@ -24,6 +24,8 @@ public class AccountDAO {
 		return sqlSession.selectOne(NAMESPACE + "detail", dto);
 	}
 	
+	
+	// service transfer 관련 DAO 메서드
 	public int transferMy(TradeDTO tradeDTO) throws Exception{
 		
 		return sqlSession.insert(NAMESPACE + "transferMy", tradeDTO);
@@ -31,17 +33,17 @@ public class AccountDAO {
 	
 	public int transferYou(TradeDTO tradeDTO) throws Exception{
 		
-		return sqlSession.insert(NAMESPACE + "transferMy", tradeDTO);
+		return sqlSession.insert(NAMESPACE + "transferYou", tradeDTO);
 	}
 	
-	public int updateMy(AccountDTO dto) throws Exception{
+	public int updateMy(TradeDTO tradeDTO) throws Exception{
 		
-		return sqlSession.update(NAMESPACE + "updateMy", dto);
+		return sqlSession.update(NAMESPACE + "updateMy", tradeDTO);
 	}
 	
-	public int updateYou(AccountDAO dto) throws Exception{
+	public int updateYou(TradeDTO tradeDTO) throws Exception{
 		
-		return sqlSession.update(NAMESPACE + "updateYou", dto);
+		return sqlSession.update(NAMESPACE + "updateYou", tradeDTO);
 	}
 
 	
