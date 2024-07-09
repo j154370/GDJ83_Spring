@@ -10,10 +10,46 @@
 		VALUES (#{account_num}, #{user_id}, #{product_num}, 0, SYSDATE)
   	</insert>
   	
-  	<select id = "list" resultType="AccountDTO" parameterType="MemberDTO">
-  		SELECT ACCOUNT_NUM, BALANCE FROM ACCOUNT_INFO
-  		WHERE USER_ID = #{user_id}
+  	<select id="detail" parameterType="AccountDTO" resultMap="detailResult">
+  		SELECT P.PRODUCT_NAME, P.PRODUCT_RATE, A.* FROM PRODUCT_INFO P
+		INNER JOIN ACCOUNT_INFO A
+		ON P.PRODUCT_NUM = A.PRODUCT_NUM 
+		WHERE A.ACCOUNT_NUM = #{account_num}
   	</select>
   	
+  	<resultMap type="AccountDTO" id="detailResult">
+  		<id column="ACCOUNT_NUM" property="account_num" />
+  		<result column="USER_ID" property="user_id" />
+  		<result column="PRODUCT_NUM" property="product_num" />
+  		<result column="BALANCE" property="balance" />
+  		<result column="ACCOUNT_DATE" property="account_date" />
+  		<!-- 1 : 1의 관계 -->
+  		<association property="productDTO" javaType="ProductDTO">
+  			<result column="PRODUCT_NAME" property="product_name"/>
+  			<result column="PRODUCT_RATE" property="product_rate"/>		
+  		</association>
+  	</resultMap>
+
+  	
+  	<!-- 내 거래내역 쿼리 -->
+  	<insert id="transferMy" parameterType="com.goodee.app.account.TradeDTO">
+  		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
+		VALUES (TRADE_SEQ.NEXTVAL, #{account_num}, #{balance}, '출금', #{trade_amount}, SYSDATE)
+  	</insert>
+  	<!-- 상대방 거래내역 쿼리 -->
+  	<insert id="transferYou" parameterType="com.goodee.app.account.TradeDTO">
+  		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
+		VALUES (TRADE_SEQ.NEXTVAL, #{account_num}, #{balance}, '입금', #{trade_amount}, SYSDATE)
+  	</insert>
+ 	<!-- 내 계좌정보 업데이트 -->
+  	<update id="updateMy" parameterType="AccountDTO">
+  		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE - ?
+		WHERE ACCOUNT_NUM = #{account_num}
+  	</update>
+  	<!-- 상대방 계좌정보 업데이트 -->
+  	<update id="updateYou" parameterType="AccountDTO">
+  		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE + ?
+		WHERE ACCOUNT_NUM = #{account_num}
+  	</update>
  
   </mapper>

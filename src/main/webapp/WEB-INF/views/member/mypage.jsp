@@ -14,16 +14,16 @@
 
 	<h1>회원정보 페이지</h1>
 	
-	<h3>${sessionScope.dto.user_id }</h3>
-	<h3>${sessionScope.dto.user_name }</h3>
-	<h3>${sessionScope.dto.user_email }</h3>
-	<h3>${sessionScope.dto.user_phone }</h3>
-	<h3>${sessionScope.dto.user_address }</h3>
-	
+	<h3>${dto.user_id }</h3>
+	<h3>${dto.user_name }</h3>
+	<h3>${dto.user_email }</h3>
+	<h3>${dto.user_phone }</h3>
+	<h3>${dto.user_address }</h3>
+
 	<div>
 		<h3>계좌정보</h3>
 		<c:forEach items="${dto.dtos }" var="ac">
-			<h3>${ac.account_num } : ${ac.balance }</h3>
+			<h3><a href="/account/detail?account_num=${ac.account_num }">${ac.account_num }</a> : ${ac.balance }원</h3>
 		</c:forEach>
 	</div>
 	

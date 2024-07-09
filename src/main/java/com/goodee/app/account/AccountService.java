@@ -25,5 +25,14 @@ public class AccountService {
 		return dao.add(dto);
 		
 	}
+	
+	public AccountDTO detail(AccountDTO dto) throws Exception{
+		
+		return dao.detail(dto);
+	}
+	
+	public void transfer() throws Exception{
+		
+	}
 
 }

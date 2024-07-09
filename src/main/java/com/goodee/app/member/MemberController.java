@@ -85,13 +85,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
-	public void mypage() throws Exception {
-
+	public void mypage(HttpSession session, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		dto = service.detail(dto);
+		model.addAttribute("dto", dto);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public void update(Model model, MemberDTO dto) throws Exception {
-		
+	public void update(HttpSession session, Model model) throws Exception {
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		dto = service.detail(dto);
+		model.addAttribute("dto", dto);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)
@@ -102,9 +106,9 @@ public class MemberController {
 		
 		int result = service.update(dto);
 		
-		if(result > 0) {
-			session.setAttribute("dto", dto);
-		}
+//		if(result > 0) {
+//			session.setAttribute("dto", dto);
+//		}
 
 		return "redirect:/";
 	}

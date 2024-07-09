@@ -18,23 +18,23 @@
 		</div>
 		<div class="row">
 			<form action="/member/update" method="post">
-				<input type="hidden" name="user_id" value="${sessionScope.dto.user_id }">
+				<input type="hidden" name="user_id" value="${dto.user_id }">
 				
 				<div class="mb-3">
 					<label for="user_phone" class="form-label">전화번호</label>
-					<input type="text" class="form-control" id="user_phone" name="user_phone" value="${sessionScope.dto.user_phone }">
+					<input type="text" class="form-control" id="user_phone" name="user_phone" value="${dto.user_phone }">
 				</div>
 				<div class="mb-3">
 					<label for="user_email" class="form-label">이메일</label>
-					<input type="text" class="form-control" id="user_email" name="user_email" value="${sessionScope.dto.user_email }">
+					<input type="text" class="form-control" id="user_email" name="user_email" value="${dto.user_email }">
 				</div>
 				<div class="mb-3">
 					<label for="user_address" class="form-label">주소</label>
-					<input type="text" class="form-control" id="user_address" name="user_address" value="${sessionScope.dto.user_address }">
+					<input type="text" class="form-control" id="user_address" name="user_address" value="${dto.user_address }">
 				</div>
 				<div class="mb-3">
 					<label for="user_name" class="form-label">이름</label>
-					<input type="text" class="form-control" id="user_name" name="user_name" value="${sessionScope.dto.user_name }">
+					<input type="text" class="form-control" id="user_name" name="user_name" value="${dto.user_name }">
 				</div>
 				
 				<button type="submit" class="btn btn-primary">수정</button>

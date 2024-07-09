@@ -2,6 +2,9 @@ package com.goodee.app.account;
 
 import java.sql.Date;
 
+import com.goodee.app.member.MemberDTO;
+import com.goodee.app.product.ProductDTO;
+
 public class AccountDTO {
 	
 	private String account_num;
@@ -9,8 +12,22 @@ public class AccountDTO {
 	private Long product_num;
 	private Long balance;
 	private Date account_date;
+	private MemberDTO memberDTO;
+	private ProductDTO productDTO;
 	
 	
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+	}
+	public ProductDTO getProductDTO() {
+		return productDTO;
+	}
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
+	}
 	public String getAccount_num() {
 		return account_num;
 	}
