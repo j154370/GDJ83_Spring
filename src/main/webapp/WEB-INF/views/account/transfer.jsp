@@ -17,7 +17,7 @@
 		</div>
 		<div class="row">
 			<form action="/account/transfer" method="post">
-				<input type="hidden" name="account_num_me" value="${dto.account_num }">
+				<input type="hidden" name="account_num" value="${dto.account_num }">
 				<input type="hidden" name="balance" value="${dto.balance }">
 			
 				<div class="mb-3">

@@ -25,6 +25,7 @@
 	
 	
 	<a href="/account/transfer?account_num=${dto.account_num }">이체</a>
+	<a href="/account/list?account_num=${dto.account_num }&order=0">내역 조회</a>
 	
 
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>

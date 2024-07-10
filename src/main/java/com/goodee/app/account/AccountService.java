@@ -1,6 +1,7 @@
 package com.goodee.app.account;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,11 @@ public class AccountService {
 		}
 		
 		return a;
+	}
+	
+	public List<TradeDTO> getList(ListOption listOption)throws Exception{
+		
+		return dao.getList(listOption);
 	}
 
 }

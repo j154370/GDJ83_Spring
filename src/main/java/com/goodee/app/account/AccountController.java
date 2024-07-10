@@ -1,5 +1,7 @@
 package com.goodee.app.account;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,14 @@ public class AccountController {
 		}
 		
 		return path;
+	}
+	
+	@RequestMapping(value="list", method=RequestMethod.GET)
+	public void list(Model model, ListOption listOption) throws Exception{
+		
+		List<TradeDTO> list = service.getList(listOption);
+		
+		model.addAttribute("list", list);
 	}
 
 	

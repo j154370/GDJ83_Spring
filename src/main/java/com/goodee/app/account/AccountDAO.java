@@ -1,5 +1,7 @@
 package com.goodee.app.account;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,6 +46,12 @@ public class AccountDAO {
 	public int updateYou(TradeDTO tradeDTO) throws Exception{
 		
 		return sqlSession.update(NAMESPACE + "updateYou", tradeDTO);
+	}
+	
+	//거래내역 조회 메서드
+	public List<TradeDTO> getList(ListOption listOption) throws Exception{
+		
+		return sqlSession.selectList(NAMESPACE + "getList", listOption);
 	}
 
 	
