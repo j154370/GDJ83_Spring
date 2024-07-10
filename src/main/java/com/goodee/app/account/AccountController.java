@@ -46,18 +46,23 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.POST)
-	public String transfer(TradeDTO tradeDTO, AccountDTO accountDTO ) throws Exception{
+	public String transfer(TradeDTO tradeDTO, AccountDTO accountDTO, Model model ) throws Exception{
 		
 		int result = service.transfer(tradeDTO, accountDTO);
 		
-		String url = "";
+		String path = "";
 		if(result == 4) {
+			path = "commons/message";
+			model.addAttribute("result", "송금 성공");
+			model.addAttribute("url", "/member/mypage");
 			
 		}else {
-			
+			path = "commons/message";
+			model.addAttribute("result", "송금 실패");
+			model.addAttribute("url", "/member/mypage");
 		}
 		
-		return "redirect:/member/mypage";
+		return path;
 	}
 
 	
