@@ -25,26 +25,4 @@ public class AccountDAO {
 	}
 	
 	
-	// service transfer 관련 DAO 메서드
-	public int transferMy(TradeDTO tradeDTO) throws Exception{
-		
-		return sqlSession.insert(NAMESPACE + "transferMy", tradeDTO);
-	}
-	
-	public int transferYou(TradeDTO tradeDTO) throws Exception{
-		
-		return sqlSession.insert(NAMESPACE + "transferYou", tradeDTO);
-	}
-	
-	public int updateMy(TradeDTO tradeDTO) throws Exception{
-		
-		return sqlSession.update(NAMESPACE + "updateMy", tradeDTO);
-	}
-	
-	public int updateYou(TradeDTO tradeDTO) throws Exception{
-		
-		return sqlSession.update(NAMESPACE + "updateYou", tradeDTO);
-	}
-
-	
 }

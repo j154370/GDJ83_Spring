@@ -1,14 +1,22 @@
-package com.goodee.app.account;
+package com.goodee.app.trade;
 
 import java.sql.Date;
 
 public class TradeDTO {
 	
 	private Long trade_num;
-	private String account_num_me;
-	private String account_num_you;
+	private String account_num;
+	private String receive_num;
 	private Long balance;
 	private String trade_type;
+	
+	
+	public String getReceive_num() {
+		return receive_num;
+	}
+	public void setReceive_num(String receive_num) {
+		this.receive_num = receive_num;
+	}
 	private Long trade_amount;
 	private Date trade_date;
 	
@@ -21,17 +29,12 @@ public class TradeDTO {
 		this.trade_num = trade_num;
 	}
 	
-	public String getAccount_num_me() {
-		return account_num_me;
+
+	public String getAccount_num() {
+		return account_num;
 	}
-	public void setAccount_num_me(String account_num_me) {
-		this.account_num_me = account_num_me;
-	}
-	public String getAccount_num_you() {
-		return account_num_you;
-	}
-	public void setAccount_num_you(String account_num_you) {
-		this.account_num_you = account_num_you;
+	public void setAccount_num(String account_num) {
+		this.account_num = account_num;
 	}
 	public Long getBalance() {
 		return balance;

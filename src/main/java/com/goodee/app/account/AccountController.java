@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.goodee.app.member.MemberDTO;
+import com.goodee.app.trade.TradeDTO;
+import com.goodee.app.trade.TradeService;
 
 @Controller
 @RequestMapping("/account/*")
@@ -16,6 +18,9 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService service;
+	
+	@Autowired
+	private TradeService tradeService;
 	
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
@@ -39,31 +44,20 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.GET)
-	public void transfer(AccountDTO dto, Model model) throws Exception{
-		dto = service.detail(dto);
-		
-		model.addAttribute("dto", dto);
+	public void transfer() throws Exception{
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.POST)
-	public String transfer(TradeDTO tradeDTO, AccountDTO accountDTO, Model model ) throws Exception{
+	public String transfer2(TradeDTO tradeDTO) throws Exception{
 		
-		int result = service.transfer(tradeDTO, accountDTO);
+		// 보내는 계좌 : account_num
+		// 받는 계좌 : receive_num
+		int result = tradeService.trade(tradeDTO);
 		
-		String path = "";
-		if(result == 4) {
-			path = "commons/message";
-			model.addAttribute("result", "송금 성공");
-			model.addAttribute("url", "/member/mypage");
-			
-		}else {
-			path = "commons/message";
-			model.addAttribute("result", "송금 실패");
-			model.addAttribute("url", "/member/mypage");
-		}
+		return "redirect:../member/mypage";
 		
-		return path;
 	}
+	
 
 	
 }

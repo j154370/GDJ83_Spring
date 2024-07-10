@@ -31,19 +31,6 @@ public class AccountService {
 		return dao.detail(dto);
 	}
 	
-	public int transfer(TradeDTO tradeDTO, AccountDTO accountDTO) throws Exception{
-		int a = 0;
-		
-		if(tradeDTO.getTrade_amount() > accountDTO.getBalance()) {
-			a = -1;
-		}else {
-			a = dao.transferMy(tradeDTO);
-			a +=dao.transferYou(tradeDTO);
-			a += dao.updateMy(tradeDTO);
-			a += dao.updateYou(tradeDTO);		
-		}
-		
-		return a;
-	}
+	
 
 }

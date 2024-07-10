@@ -30,28 +30,5 @@
   		</association>
   	</resultMap>
 
-  	
-  	<!-- 내 거래내역 쿼리 -->
-  	<insert id="transferMy" parameterType="com.goodee.app.account.TradeDTO">
-  		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
-		VALUES (TRADE_SEQ.NEXTVAL, #{account_num_me}, #{balance} - #{trade_amount}, '출금', #{trade_amount}, SYSDATE)
-  	</insert>
-  	<!-- 상대방 거래내역 쿼리 -->
-  	<insert id="transferYou" parameterType="com.goodee.app.account.TradeDTO">
-  		INSERT INTO TRADE_HISTORY (TRADE_NUM, ACCOUNT_NUM, BALANCE, TRADE_TYPE, TRADE_AMOUNT, TRADE_DATE)
-		VALUES (TRADE_SEQ.NEXTVAL, #{account_num_you},
-			(SELECT BALANCE FROM ACCOUNT_INFO WHERE ACCOUNT_NUM = #{account_num_you}) + #{trade_amount}
-		, '입금', #{trade_amount}, SYSDATE)
-  	</insert>
- 	<!-- 내 계좌정보 업데이트 -->
-  	<update id="updateMy" parameterType="com.goodee.app.account.TradeDTO">
-  		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE - #{trade_amount}
-		WHERE ACCOUNT_NUM = #{account_num_me}
-  	</update>
-  	<!-- 상대방 계좌정보 업데이트 -->
-  	<update id="updateYou" parameterType="com.goodee.app.account.TradeDTO">
-  		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE + #{trade_amount}
-		WHERE ACCOUNT_NUM = #{account_num_you}
-  	</update>
  
   </mapper>
