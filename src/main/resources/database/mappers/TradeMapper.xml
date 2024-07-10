@@ -17,7 +17,7 @@
  	<!-- 내 계좌정보 업데이트 -->
   	<update id="update" parameterType="TradeDTO">
   		UPDATE ACCOUNT_INFO SET BALANCE = BALANCE + #{trade_amount}
-		WHERE ACCOUNT_NUM = #{account_num}
+		WHERE ACCOUNT_NUM = #{account_num}ype.equals('출금')">
   	</update>
  
  
