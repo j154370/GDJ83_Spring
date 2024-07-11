@@ -5,8 +5,18 @@
   
   <mapper namespace="com.goodee.app.product.ProductDAO">
   
-  	<select id="getList" resultType="ProductDTO">
-  		SELECT * FROM PRODUCT_INFO ORDER BY PRODUCT_NUM ASC
+  	<select id="getList" resultType="ProductDTO" parameterType="com.goodee.app.util.Pager">
+  		SELECT * FROM 
+			(
+				SELECT ROWNUM R, B.* FROM
+				(
+					SELECT * FROM PRODUCT_INFO
+					ORDER BY PRODUCT_NUM DESC) B)
+					WHERE R	BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<select id="getTotalCount" resultType="java.lang.Long">
+  		SELECT COUNT(PRODUCT_NUM) FROM PRODUCT_INFO
   	</select>
 
   	<select id="getDetail" resultType="ProductDTO" parameterType="ProductDTO">

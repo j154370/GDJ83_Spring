@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.goodee.app.util.Pager;
+
 
 @Repository
 public class ProductDAO {
@@ -16,10 +18,15 @@ public class ProductDAO {
 	private final String NAMESPACE="com.goodee.app.product.ProductDAO.";
 	
 
-	public List<ProductDTO> getList() throws Exception{
+	public List<ProductDTO> getList(Pager pager) throws Exception{
 		
-		return sqlSession.selectList(NAMESPACE + "getList");
+		return sqlSession.selectList(NAMESPACE + "getList", pager);	
+	}
+	
+	// service에서 사용할 totalCount 값을 구하기 위한 메서드
+	public Long getTotalCount() throws Exception{
 		
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount");
 	}
 	
 	public ProductDTO getDetail(ProductDTO dto) throws Exception{

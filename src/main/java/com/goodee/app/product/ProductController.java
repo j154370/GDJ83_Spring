@@ -16,8 +16,8 @@ public class ProductController {
 	private ProductService service;
 	
 	@RequestMapping("list")
-	public void getList(Model model) throws Exception{
-		List<ProductDTO> dtos = service.getList();
+	public void getList(Model model, Long page) throws Exception{
+		List<ProductDTO> dtos = service.getList(page);
 		
 		model.addAttribute("list", dtos);
 	}
