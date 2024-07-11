@@ -23,7 +23,7 @@
 			</thead>
 
 			<tbody>
-				<c:forEach items="${requestScope.list}" var="dto">
+				<c:forEach items="${map.list}" var="dto">
 					<tr>
 						<td>${pageScope.dto.product_num }</td>
 						<td><a href="/product/detail?product_num=${pageScope.dto.product_num }">${pageScope.dto.product_name }</a></td>
@@ -38,15 +38,17 @@
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Previous">
+		      <a class="page-link" href="/product/list?page=${map.startNum-1 }" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
-		    <li class="page-item"><a class="page-link" href="/product/list?page=1">1</a></li>
-		    <li class="page-item"><a class="page-link" href="/product/list?page=2">2</a></li>
-		    <li class="page-item"><a class="page-link" href="/product/list?page=3">3</a></li>
-		    <li class="page-item">
-		      <a class="page-link" href="#" aria-label="Next">
+		    
+		    <c:forEach begin="${map.startNum }" end="${map.lastNum}" step="1" var="i" >
+		    <li class="page-item"><a class="page-link" href="/product/list?page=${i}">${i}</a></li>		    
+		    </c:forEach>
+		    
+		    <li class="page-item ${map.next?'':'disabled' }">
+		      <a class="page-link" href="/product/list?page=${map.lastNum+1 }" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
