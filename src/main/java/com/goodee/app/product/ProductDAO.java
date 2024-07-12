@@ -21,6 +21,7 @@ public class ProductDAO {
 	public List<ProductDTO> getList(Pager pager) throws Exception{
 		
 		return sqlSession.selectList(NAMESPACE + "getList", pager);	
+		
 	}
 	
 	// service에서 사용할 totalCount 값을 구하기 위한 메서드

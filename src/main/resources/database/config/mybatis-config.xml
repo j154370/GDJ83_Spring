@@ -10,6 +10,7 @@
   		<typeAlias type="com.goodee.app.account.AccountDTO" alias="AccountDTO"/>		
   		<typeAlias type="com.goodee.app.account.TradeDTO" alias="TradeDTO"/>		
   		<typeAlias type="com.goodee.app.account.ListOption" alias="ListOption"/>		
+  		<typeAlias type="com.goodee.app.notice.NoticeDTO" alias="NoticeDTO"/>		
   	</typeAliases>
   
   

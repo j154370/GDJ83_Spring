@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.goodee.app.notice.NoticeDAO">
+  
+  	<select id="getList" resultType="NoticeDTO">
+  		SELECT * FROM NOTICE
+  	</select>
+  	
+  	<select id="getDetail" resultType="NoticeDTO" parameterType="NoticeDTO">
+  		SELECT * FROM NOTICE 
+			WHERE BOARD_NUM = #{board_num}
+  	</select>
+  	
+  	<insert id="add" parameterType="NoticeDTO">
+  		INSERT INTO NOTICE
+  		(BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE, BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY)
+			VALUES (BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE, 0, #{board_contents}, 'a')
+  	</insert>
+  	
+  	<delete id="delete" parameterType="NoticeDTO">
+  		DELETE NOTICE WHERE BOARD_NUM = #{board_num}
+  	</delete>
+  	
+  	<update id="update" parameterType="NoticeDTO">
+  		UPDATE NOTICE SET BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
+			WHERE BOARD_NUM = #{board_num}
+  	</update>
+  
+  	
+ 
+  </mapper>
