@@ -15,7 +15,7 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
-	public Map<String, Object> getList(Long page) throws Exception{
+	public Map<String, Object> getList(Long page, String kind, String search) throws Exception{
 		// page가 1이면, 첫번째 숫자는 1, 두번째 숫자는 10
 		// page가 2이면, 첫번째 숫자는 11, 두번째 숫자는 20
 		// page가 3이면, 첫번째 숫자는 21, 두번째 숫자는 30
@@ -27,6 +27,10 @@ public class ProductService {
 			page=1L;
 		}
 		
+		if(search == null) {
+			search = "";
+		}
+		
 		
 		long perPage = 10L;
 		long startRow = (page-1) * perPage+1;
@@ -35,8 +39,10 @@ public class ProductService {
 		Pager pager = new Pager();
 		pager.setStartRow(startRow);
 		pager.setLastRow(lastRow);
+		pager.setKind(kind);
+		pager.setSearch(search);
 		
-		long totalCount = dao.getTotalCount();
+		long totalCount = dao.getTotalCount(pager);
 		long totalPage = 0;
 		
 		// 1.총 개수로 총 페이지 수 구하기
@@ -87,6 +93,8 @@ public class ProductService {
 		map.put("startNum", startNum);
 		map.put("lastNum", lastNum);
 		map.put("next", next);
+		map.put("kind", kind);
+		map.put("search", search);
 		
 		return map;
 	}

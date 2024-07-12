@@ -24,9 +24,9 @@ public class ProductDAO {
 	}
 	
 	// service에서 사용할 totalCount 값을 구하기 위한 메서드
-	public Long getTotalCount() throws Exception{
+	public Long getTotalCount(Pager pager) throws Exception{
 		
-		return sqlSession.selectOne(NAMESPACE + "getTotalCount");
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}
 	
 	public ProductDTO getDetail(ProductDTO dto) throws Exception{
