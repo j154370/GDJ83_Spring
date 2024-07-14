@@ -12,6 +12,30 @@
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 
 	<div>
+		<!-- 검색 입력 폼 -->
+		<form action="/notice/list" method="get" class="row row-cols-lg-auto g-3 align-items-center">
+		
+		  <div class="col-12">
+		    <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
+		    <select name="kind" class="form-select" id="inlineFormSelectPref">
+		      <option value="k1">글 제목</option>
+		      <option value="k2">글 내용</option>
+		      <option value="k3">작성자</option>
+		    </select>
+		  </div>
+		  
+		  <div class="col-12">
+		    <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
+		    <div class="input-group">
+		      <input type="text" name="search" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username">
+		    </div>
+		  </div>
+		  <div class="col-12">
+		    <button type="submit" class="btn btn-primary">검색하기</button>
+		  </div>
+		</form>
+	
+	
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -26,7 +50,7 @@
 			</thead>
 
 			<tbody>
-				<c:forEach items="${list}" var="dto">
+				<c:forEach items="${map.list}" var="dto">
 					<tr>
 						<td>${dto.board_num }</td>
 						<td>${dto.board_category }</td>
@@ -40,6 +64,26 @@
 
 			</tbody>
 		</table>
+		
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination">
+		    <li class="page-item">
+		      <a class="page-link" href="/notice/list?page=${map.startNum-1 }" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    
+		    <c:forEach begin="${map.startNum }" end="${map.lastNum}" step="1" var="i" >
+		    <li class="page-item"><a class="page-link" href="/notice/list?page=${i}">${i}</a></li>		    
+		    </c:forEach>
+		    
+		    <li class="page-item ${map.next?'' : 'disabled' }">
+		      <a class="page-link" href="/notice/list?page=${map.lastNum+1 }" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
 		
 		<div>
 			<a href="/notice/add" class="btn btn-outline-primary">게시글 등록</a>

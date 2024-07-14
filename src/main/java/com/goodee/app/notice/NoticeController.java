@@ -1,6 +1,6 @@
 package com.goodee.app.notice;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +16,11 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getList(Model model) throws Exception{
+	public void getList(Model model, Long page, String kind, String search) throws Exception{
 		
-		List<NoticeDTO> list = service.getList();
+		Map<String, Object> map = service.getList(page, kind, search);
 		
-		model.addAttribute("list", list);
+		model.addAttribute("map", map);
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)

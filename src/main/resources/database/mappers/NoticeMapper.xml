@@ -5,8 +5,42 @@
   
   <mapper namespace="com.goodee.app.notice.NoticeDAO">
   
-  	<select id="getList" resultType="NoticeDTO">
-  		SELECT * FROM NOTICE
+  	<select id="getList" resultType="NoticeDTO" parameterType="com.goodee.app.util.Pager">
+  		SELECT * FROM 
+			(SELECT ROWNUM R, B.* FROM
+			(SELECT * FROM NOTICE
+			<where>
+				<choose>
+					<when test="kind == 'k1'">
+						BOARD_TITLE LIKE '%'||#{search}||'%'
+					</when>
+					<when test="kind == 'k2'">
+						BOARD_CONTENTS LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						AND BOARD_WRITER LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+			</where> 
+			ORDER BY BOARD_NUM DESC) B)
+			WHERE R	BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<select id="getTotalCount" resultType="java.lang.Long" parameterType="com.goodee.app.util.Pager">
+  		SELECT COUNT(BOARD_NUM) FROM NOTICE
+  		<where>
+				<choose>
+					<when test="kind == 'k1'">
+						BOARD_TITLE LIKE '%'||#{search}||'%'
+					</when>
+					<when test="kind == 'k2'">
+						BOARD_CONTENTS LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						AND BOARD_WRITER LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+			</where> 
   	</select>
   	
   	<select id="getDetail" resultType="NoticeDTO" parameterType="NoticeDTO">
