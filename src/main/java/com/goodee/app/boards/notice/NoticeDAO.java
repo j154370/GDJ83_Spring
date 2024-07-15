@@ -1,4 +1,4 @@
-package com.goodee.app.notice;
+package com.goodee.app.boards.notice;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class NoticeDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private String NAMESPACE = "com.goodee.app.notice.NoticeDAO.";
+	private String NAMESPACE = "com.goodee.app.boards.notice.NoticeDAO.";
 	
 	
 	public List<NoticeDTO> getList(Pager pager) throws Exception{

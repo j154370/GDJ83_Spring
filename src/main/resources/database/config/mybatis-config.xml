@@ -9,8 +9,10 @@
   		<typeAlias type="com.goodee.app.member.MemberDTO" alias="MemberDTO"/>
   		<typeAlias type="com.goodee.app.account.AccountDTO" alias="AccountDTO"/>		
   		<typeAlias type="com.goodee.app.account.TradeDTO" alias="TradeDTO"/>		
-  		<typeAlias type="com.goodee.app.account.ListOption" alias="ListOption"/>		
-  		<typeAlias type="com.goodee.app.notice.NoticeDTO" alias="NoticeDTO"/>		
+  		<typeAlias type="com.goodee.app.account.ListOption" alias="ListOption"/>	
+  		<typeAlias type="com.goodee.app.boards.BoardDTO" alias="BoardDTO"/>	  			
+  		<typeAlias type="com.goodee.app.boards.notice.NoticeDTO" alias="NoticeDTO"/>	  			
+  		<typeAlias type="com.goodee.app.boards.qna.QnaDTO" alias="QnaDTO"/>		
   	</typeAliases>
   
   

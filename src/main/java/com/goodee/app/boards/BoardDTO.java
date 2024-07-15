@@ -1,9 +1,9 @@
-package com.goodee.app.notice;
+package com.goodee.app.boards;
 
 import java.sql.Date;
 
-public class NoticeDTO {
-	
+public class BoardDTO {
+
 	private Long board_num;
 	private String board_writer;
 	private String board_title;
@@ -62,5 +62,6 @@ public class NoticeDTO {
 	public void setBoard_category(String board_category) {
 		this.board_category = board_category;
 	}
-
+	
+	
 }

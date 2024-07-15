@@ -1,4 +1,4 @@
-package com.goodee.app.notice;
+package com.goodee.app.boards.notice;
 
 import java.util.HashMap;
 import java.util.List;
