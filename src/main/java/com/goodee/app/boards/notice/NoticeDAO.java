@@ -6,43 +6,50 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.goodee.app.boards.BoardDAO;
+import com.goodee.app.boards.BoardDTO;
 import com.goodee.app.util.Pager;
 
 @Repository
-public class NoticeDAO {
+public class NoticeDAO implements BoardDAO{
 
 	@Autowired
 	private SqlSession sqlSession;
 	
 	private String NAMESPACE = "com.goodee.app.boards.notice.NoticeDAO.";
 	
-	
-	public List<NoticeDTO> getList(Pager pager) throws Exception{
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception{
 		
 		return sqlSession.selectList(NAMESPACE + "getList", pager);
 	}
 	
+	@Override
 	public Long getTotalCount(Pager pager) throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}
 	
-	public NoticeDTO getDetail(NoticeDTO dto) throws Exception{
+	@Override
+	public NoticeDTO getDetail(BoardDTO dto) throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE + "getDetail", dto);
 	}
 	
-	public int add(NoticeDTO dto) throws Exception{
+	@Override
+	public int add(BoardDTO dto) throws Exception{
 		
 		return sqlSession.insert(NAMESPACE + "add", dto);
 	}
 	
-	public int delete(NoticeDTO dto) throws Exception{
+	@Override
+	public int delete(BoardDTO dto) throws Exception{
 		
 		return sqlSession.delete(NAMESPACE + "delete", dto);
 	}
 	
-	public int update(NoticeDTO dto) throws Exception{
+	@Override
+	public int update(BoardDTO dto) throws Exception{
 		
 		return sqlSession.update(NAMESPACE + "update", dto);
 	}

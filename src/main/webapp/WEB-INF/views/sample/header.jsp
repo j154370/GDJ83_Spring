@@ -11,7 +11,7 @@
     <a class="nav-link" href="/notice/list">공지사항</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="/qna/list">Q&A 게시판</a>
   </li>
 <%-- 
   <c:if test="${empty dto }">

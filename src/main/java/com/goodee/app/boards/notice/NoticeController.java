@@ -1,5 +1,6 @@
 package com.goodee.app.boards.notice;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.goodee.app.boards.BoardDTO;
+import com.goodee.app.util.Pager;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -16,24 +20,30 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void getList(Model model, Long page, String kind, String search) throws Exception{
+	public String getList(Model model, Pager pager) throws Exception{
 		
-		Map<String, Object> map = service.getList(page, kind, search);
+		List<BoardDTO> list = service.getList(pager);
 		
-		model.addAttribute("map", map);
+		model.addAttribute("pager",pager);
+		model.addAttribute("list", list);
+		
+		return "board/list";
 	}
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
-	public void getDetail(NoticeDTO dto, Model model) throws Exception{
+	public String getDetail(NoticeDTO dto, Model model) throws Exception{
 		
-		dto = service.getDetail(dto);
+		BoardDTO boardDTO = service.getDetail(dto);
 		
-		model.addAttribute("dto", dto);
+		model.addAttribute("dto", boardDTO);
+		
+		return "board/detail";
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public void add() throws Exception{
+	public String add() throws Exception{
 		
+		return "board/add";
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
@@ -56,10 +66,12 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public void update(NoticeDTO dto, Model model) throws Exception{
-		dto = service.getDetail(dto);
+	public String update(NoticeDTO dto, Model model) throws Exception{
+		BoardDTO boardDTO = service.getDetail(dto);
 		
-		model.addAttribute("dto", dto);
+		model.addAttribute("dto", boardDTO);
+		
+		return "board/update";
 		
 	}
 	

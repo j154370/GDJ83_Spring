@@ -50,7 +50,7 @@
 			</thead>
 
 			<tbody>
-				<c:forEach items="${map.list}" var="dto">
+				<c:forEach items="${list}" var="dto">
 					<tr>
 						<td>${dto.board_num }</td>
 						<td>${dto.board_category }</td>
@@ -68,17 +68,17 @@
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination">
 		    <li class="page-item">
-		      <a class="page-link" href="/notice/list?page=${map.startNum-1 }" aria-label="Previous">
+		      <a class="page-link" href="/notice/list?page=${pager.startNum-1 }" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
 		    
-		    <c:forEach begin="${map.startNum }" end="${map.lastNum}" step="1" var="i" >
+		    <c:forEach begin="${pager.startNum }" end="${pager.lastNum}" step="1" var="i" >
 		    <li class="page-item"><a class="page-link" href="/notice/list?page=${i}">${i}</a></li>		    
 		    </c:forEach>
 		    
-		    <li class="page-item ${map.next?'' : 'disabled' }">
-		      <a class="page-link" href="/notice/list?page=${map.lastNum+1 }" aria-label="Next">
+		    <li class="page-item ${pager.next?'' : 'disabled' }">
+		      <a class="page-link" href="/notice/list?page=${pager.lastNum+1 }" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
