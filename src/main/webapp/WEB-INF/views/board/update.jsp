@@ -16,7 +16,7 @@
 			<h1>작성글 수정 페이지</h1>
 		</div>
 		<div class="row">
-			<form action="/notice/update" method="post">
+			<form action="./update" method="post">
 				<input type="hidden" name="board_num" value="${dto.board_num }">
 				
 				<div class="mb-3">

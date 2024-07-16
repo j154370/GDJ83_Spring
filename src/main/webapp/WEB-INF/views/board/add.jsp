@@ -13,19 +13,22 @@
 
 <div class="container">
 		<div class="row">
-			<h1>게시글 작성</h1>
+			<h1>${board } 게시글 작성</h1>
 		</div>
 		
 		<div class="row">
-			<form action="/notice/add" method="post">
-				<input type="hidden" name="board_writer" value="${dto.board_writer }">
+			<form action="./add" method="post">
+				<div class="mb-3">
+					<label for="board_writer" class="form-label">작성자</label>
+					<input type="text" readonly class="form-control" id="board_writer" name="board_writer" value="${dto.user_id }">
+				</div>
 				<div class="mb-3">
 					<label for="board_title" class="form-label">제목</label>
 					<input type="text" class="form-control" id="board_title" name="board_title">
 				</div>
 				<div class="mb-3">
 					<label for="board_contents" class="form-label">본문</label>
-					<input type="text" class="form-control" id="board_contents" name="board_contents">
+					<textarea rows="5" class="form-control" id="board_contents" name="board_contents"></textarea>
 				</div>
 				
 				

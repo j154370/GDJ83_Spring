@@ -11,6 +11,7 @@
 <body>
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 
+	
 	<h1>상세 페이지</h1>
 	
 	<h3>${dto.board_num }</h3>
@@ -22,8 +23,8 @@
 	<h3>${dto.board_hit }</h3>
 	<h3>${dto.board_contents }</h3>
 	
-	<a href="/notice/delete?board_num=${dto.board_num }">삭제</a>
-	<a href="/notice/update?board_num=${dto.board_num }">수정</a>
+	<a href="./delete?board_num=${dto.board_num }">삭제</a>
+	<a href="./update?board_num=${dto.board_num }">수정</a>
 	
 
 <c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>

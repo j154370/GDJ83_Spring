@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.goodee.app.boards.notice.NoticeDAO">
+  <mapper namespace="com.goodee.app.boards.qna.QnaDAO">
   
-  <sql id = "searchSql">
+  	<sql id = "searchSql">
   		<where>
 		  	 BOARD_NUM > 0
 		  	<choose>
@@ -23,39 +23,50 @@
   
   	</sql>
   
-  	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
-  		SELECT * FROM 
-			(SELECT ROWNUM R, B.* FROM
-			(SELECT * FROM NOTICE
-			<include refid="searchSql"></include>
-			ORDER BY BOARD_NUM DESC) B)
-			WHERE R	BETWEEN #{startRow} AND #{lastRow}
+  	<select id="getList" resultType="QnaDTO" parameterType="Pager">
+	  	SELECT * FROM
+		  	(SELECT ROWNUM R, Q.* FROM
+				(SELECT * FROM QNA
+		  		
+		  		<include refid="searchSql"></include>
+		  		
+		  		ORDER BY REF DESC, STEP ASC
+		  		) Q
+		  	)
+		  	WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
   	<select id="getTotalCount" resultType="java.lang.Long" parameterType="Pager">
-  		SELECT COUNT(BOARD_NUM) FROM NOTICE
+  		SELECT COUNT(BOARD_NUM) FROM QNA
   		<include refid="searchSql"></include>
   	</select>
   	
-  	<select id="getDetail" resultType="NoticeDTO" parameterType="NoticeDTO">
-  		SELECT * FROM NOTICE 
+  	<select id="getDetail" resultType="QnaDTO" parameterType="QnaDTO">
+  		SELECT * FROM QNA
 			WHERE BOARD_NUM = #{board_num}
   	</select>
   	
-  	<insert id="add" parameterType="NoticeDTO">
-  		INSERT INTO NOTICE
-  		(BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE, BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY)
-			VALUES (BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE, 0, #{board_contents}, 'a')
+  	<insert id="add" parameterType="QnaDTO">
+  		INSERT INTO QNA
+  		(
+  			BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE,
+  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+  		)
+		VALUES
+		(
+		BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE,
+		0, #{board_contents}, 'Q', BOARD_SEQ.CURRVAL, 0, 0
+		)
   	</insert>
   	
-  	<delete id="delete" parameterType="NoticeDTO">
+ <!--  	<delete id="delete" parameterType="NoticeDTO">
   		DELETE NOTICE WHERE BOARD_NUM = #{board_num}
   	</delete>
   	
   	<update id="update" parameterType="NoticeDTO">
   		UPDATE NOTICE SET BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
 			WHERE BOARD_NUM = #{board_num}
-  	</update>
+  	</update> -->
   
   	
  

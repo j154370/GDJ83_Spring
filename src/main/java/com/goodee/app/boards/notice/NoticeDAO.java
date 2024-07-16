@@ -16,7 +16,7 @@ public class NoticeDAO implements BoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private String NAMESPACE = "com.goodee.app.boards.notice.NoticeDAO.";
+	private final String NAMESPACE = "com.goodee.app.boards.notice.NoticeDAO.";
 	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception{
@@ -31,7 +31,7 @@ public class NoticeDAO implements BoardDAO{
 	}
 	
 	@Override
-	public NoticeDTO getDetail(BoardDTO dto) throws Exception{
+	public BoardDTO getDetail(BoardDTO dto) throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE + "getDetail", dto);
 	}
