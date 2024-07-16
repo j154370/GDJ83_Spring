@@ -59,6 +59,7 @@
 							</c:if>		
 						</td>
 						<td>${dto.board_category }</td>
+						<td>		
 						<c:choose>
 							<c:when test="${dto.del eq 0 }">
 								<a href="./detail?board_num=${dto.board_num }">
@@ -72,7 +73,7 @@
 								삭제된 글입니다.
 							</c:otherwise>
 						</c:choose>
-						
+						</td>
 						<td>${dto.board_writer }</td>
 						<td>${dto.create_date }</td>
 						<td>${dto.update_date }</td>
