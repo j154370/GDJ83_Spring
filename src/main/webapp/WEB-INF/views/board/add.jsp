@@ -17,18 +17,21 @@
 		</div>
 		
 		<div class="row">
-			<form action="./add" method="post">
+			<form method="post">
+			<input type="hidden" value="${requestScope.dto.board_num}" name="board_num">
 				<div class="mb-3">
 					<label for="board_writer" class="form-label">작성자</label>
-					<input type="text" readonly class="form-control" id="board_writer" name="board_writer" value="${dto.user_id }">
+					<input type="text" readonly class="form-control" id="board_writer" name="board_writer" value="${sessionScope.dto.user_id }">
 				</div>
 				<div class="mb-3">
 					<label for="board_title" class="form-label">제목</label>
-					<input type="text" class="form-control" id="board_title" name="board_title">
+					<input type="text" class="form-control" id="board_title" name="board_title" value="${requestScope.dto.board_title}">
 				</div>
 				<div class="mb-3">
 					<label for="board_contents" class="form-label">본문</label>
-					<textarea rows="5" class="form-control" id="board_contents" name="board_contents"></textarea>
+					<textarea rows="5" class="form-control" id="board_contents" name="board_contents">
+						${requestScope.dto.board_contents }
+					</textarea>
 				</div>
 				
 				

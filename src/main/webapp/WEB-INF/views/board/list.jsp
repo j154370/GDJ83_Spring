@@ -53,9 +53,26 @@
 			<tbody>
 				<c:forEach items="${list}" var="dto">
 					<tr>
-						<td>${dto.board_num }</td>
+						<td>
+							<c:if test="${dto.del eq 0 }">
+								${dto.board_num }
+							</c:if>		
+						</td>
 						<td>${dto.board_category }</td>
-						<td><a href="./detail?board_num=${dto.board_num }">${dto.board_title }</a></td>
+						<c:choose>
+							<c:when test="${dto.del eq 0 }">
+								<a href="./detail?board_num=${dto.board_num }">
+								<c:catch>
+									<c:forEach begin="1" end="${dto.depth }">┗></c:forEach>						
+								</c:catch>
+								${dto.board_title }
+								</a>
+							</c:when>
+							<c:otherwise>
+								삭제된 글입니다.
+							</c:otherwise>
+						</c:choose>
+						
 						<td>${dto.board_writer }</td>
 						<td>${dto.create_date }</td>
 						<td>${dto.update_date }</td>

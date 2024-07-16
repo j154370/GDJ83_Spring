@@ -41,17 +41,27 @@ public class QnaDAO implements BoardDAO{
 		
 		return sqlSession.insert(NAMESPACE + "add", dto);
 	}
-
+	
 	@Override
 	public int update(BoardDTO dto) throws Exception {
 		
-		return 0;
+		return sqlSession.update(NAMESPACE + "update", dto);
 	}
 
 	@Override
 	public int delete(BoardDTO dto) throws Exception {
 		
-		return 0;
+		return sqlSession.delete(NAMESPACE + "delete", dto);
+	}
+	
+	public int reply(QnaDTO qnaDTO) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE + "reply", qnaDTO);
+	}
+	
+	public int replyUpdate(QnaDTO qnaDTO) throws Exception{
+		
+		return sqlSession.update(NAMESPACE + "replyUpdate", qnaDTO);
 	}
 	
 	

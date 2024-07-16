@@ -41,13 +41,28 @@ public class QnaService implements BoardService{
 	@Override
 	public int delete(BoardDTO dto) throws Exception {
 	
-		return 0;
+		return qnaDAO.delete(dto);
 	}
 
 	@Override
 	public int update(BoardDTO dto) throws Exception {
 	
-		return 0;
+		return qnaDAO.update(dto);
+	}
+	
+	public int reply(QnaDTO qnaDTO) throws Exception{
+		
+		QnaDTO parent = (QnaDTO)qnaDAO.getDetail(qnaDTO);
+		
+		// step을 1씩 업데이트
+		int result = qnaDAO.replyUpdate(parent);
+		
+		
+		// 답글의 ref, step, depth를 셋팅
+		qnaDTO.setRef(parent.getRef());
+		qnaDTO.setStep(parent.getStep()+1);
+		qnaDTO.setDepth(parent.getDepth()+1);
+		return qnaDAO.reply(qnaDTO);
 	}
 	
 	

@@ -43,7 +43,7 @@
   	
   	<select id="getDetail" resultType="QnaDTO" parameterType="QnaDTO">
   		SELECT * FROM QNA
-			WHERE BOARD_NUM = #{board_num}
+			WHERE BOARD_NUM = #{board_num} AND DEL=0
   	</select>
   	
   	<insert id="add" parameterType="QnaDTO">
@@ -59,14 +59,40 @@
 		)
   	</insert>
   	
- <!--  	<delete id="delete" parameterType="NoticeDTO">
-  		DELETE NOTICE WHERE BOARD_NUM = #{board_num}
+  	<insert id="reply" parameterType="QnaDTO">
+  		INSERT INTO QNA
+  		(
+  			BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE,
+  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+  		)
+		VALUES
+		(
+		BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE,
+		0, #{board_contents}, 'Q', #{ref}, #{step}, #{depth}
+		)
+  	</insert>
+  	
+  	<update id="replyUpdate" parameterType="QnaDTO">
+  		UPDATE QNA SET STEP = STEP + 1
+  		WHERE REF = #{ref} AND STEP > #{step}
+  	</update>
+  	
+  	<delete id="delete" parameterType="QnaDTO">
+  		UPDATE QNA SET DEL = 1 WHERE BOARD_NUM = #{board_num}
   	</delete>
   	
-  	<update id="update" parameterType="NoticeDTO">
-  		UPDATE NOTICE SET BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
+  	<update id="update" parameterType="QnaDTO">
+  		UPDATE QNA SET
+  		BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
 			WHERE BOARD_NUM = #{board_num}
-  	</update> -->
+  	</update>
+  	
+  <!-- 	<insert id="addHit" parameterType="QnaDTO">
+  		INSERT INTO QNA
+  		(BOARD_HIT)
+		VALUES
+		( #{board_hit + 1})
+  	</insert> -->
   
   	
  

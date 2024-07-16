@@ -65,15 +65,47 @@ public class QnaController {
 	}
 	
 	@GetMapping("update")
-	public String update() throws Exception{
+	public String update(QnaDTO qnaDTO, Model model) throws Exception{
 		
-		return "board/update";
+		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
+		
+		model.addAttribute("dto", boardDTO);
+		
+		return "board/add";
 	}
 	
 	@PostMapping("update")
-	public String update2() throws Exception {
+	public String update(QnaDTO qnaDTO) throws Exception {
+		
+		int result = qnaService.update(qnaDTO);
 		
 		return "redirect:/qna/list";
+	}
+	
+	@GetMapping("delete")
+	public String delete(QnaDTO qnaDTO) throws Exception{
+		
+		int result = qnaService.delete(qnaDTO);
+		
+		return "redirect:/qna/list";
+	}
+	
+	@GetMapping("reply")
+	public String reply(QnaDTO qnaDTO, Model model) throws Exception{
+		
+		model.addAttribute("dto", qnaDTO);
+		
+		return "board/add";
+	}
+	
+	@PostMapping("reply")
+	public String reply(QnaDTO qnaDTO, HttpSession session) throws Exception{
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("dto");
+		qnaDTO.setBoard_writer(memberDTO.getUser_id());
+		int result = qnaService.reply(qnaDTO);
+		
+		return "redirect:./list";
 	}
 
 }
