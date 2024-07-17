@@ -29,6 +29,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
+		
+		System.out.println("Study_Conflict");
 
 		// 하위내장객체 -> 상위내장객체 가능
 		// 상위내장객체 -> 하위내장객체 불가능
