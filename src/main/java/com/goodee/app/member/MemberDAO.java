@@ -1,5 +1,7 @@
 package com.goodee.app.member;
 
+import java.util.concurrent.locks.AbstractQueuedLongSynchronizer;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,11 @@ public class MemberDAO {
 	public MemberDTO detail(MemberDTO dto) throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE + "detail", dto);
+	}
+	
+	public int addFile(MemberFileDTO memberFileDTO) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE + "addFile", memberFileDTO); 
 	}
 
 }

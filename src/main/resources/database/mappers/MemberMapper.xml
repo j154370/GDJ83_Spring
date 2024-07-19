@@ -17,9 +17,13 @@
   	
   	<select id="detail" parameterType="MemberDTO" resultMap="loginResult">
   		SELECT * FROM MEMBER_INFO mi 
-		LEFT JOIN ACCOUNT_INFO ai 
-		ON mi.USER_ID = ai.USER_ID
-		WHERE mi.USER_ID = #{user_id} 	
+			LEFT JOIN
+			ACCOUNT_INFO ai 
+			ON mi.USER_ID = ai.USER_ID
+			LEFT JOIN
+			MEMBER_FILES mf
+			ON mi.USER_ID = mf.USER_ID
+			WHERE mi.USER_ID = #{user_id}
   	</select>
   	
   	<resultMap type="MemberDTO" id="loginResult">
@@ -31,6 +35,12 @@
   		<result column="USER_PW" property="user_pw"/>
   		<result column="USER_EMAIL" property="user_email"/>
   		<result column="USER_ADDRESS" property="user_address"/>
+  		<!-- 1대 1 관계를 먼저 쓰고 그 다음에 1대 N의 관계가 나와야 한다 -->
+  		<association property="memberFileDTO" javaType="MemberFileDTO">
+  			<id column="FILE_NUM" property="file_num" />
+  			<result column="FILE_NAME" property="file_name" />
+  			<result column="ORI_NAME" property="ori_name" />
+  		</association>
   		<!-- 1 : N의 관계 -->
   		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">
   			<id column ="ACCOUNT_NUM" property="account_num" />
@@ -49,5 +59,13 @@
   	<delete id="delete" parameterType="MemberDTO">
   		DELETE MEMBER_INFO WHERE USER_ID =#{user_id}
   	</delete>
+  	
+  	<!-- File Table에 집어넣을 insert쿼리문 -->
+  	
+  	<insert id="addFile" parameterType="MemberFileDTO">
+  		INSERT INTO
+  		MEMBER_FILES (FILE_NUM, USER_ID, FILE_NAME, ORI_NAME)
+		VALUES (FILES_SEQ.NEXTVAL, #{user_id}, #{file_name}, #{ori_name})
+  	</insert>
  
   </mapper>

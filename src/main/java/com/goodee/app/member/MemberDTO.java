@@ -12,10 +12,18 @@ public class MemberDTO {
 	private String user_pw;			// 비밀번호
 	private String user_email;		// 이메일
 	private String user_address;	// 주소
+	private MemberFileDTO memberFileDTO;
 	private List<AccountDTO> dtos;
 	
 	
 	
+	
+	public MemberFileDTO getMemberFileDTO() {
+		return memberFileDTO;
+	}
+	public void setMemberFileDTO(MemberFileDTO memberFileDTO) {
+		this.memberFileDTO = memberFileDTO;
+	}
 	public List<AccountDTO> getDtos() {
 		return dtos;
 	}

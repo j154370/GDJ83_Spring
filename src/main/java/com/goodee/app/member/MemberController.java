@@ -2,6 +2,7 @@ package com.goodee.app.member;
 
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -27,8 +29,9 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String join(Model model, MemberDTO dto) throws Exception {
-		int result = service.join(dto);
+	public String join(Model model, MemberDTO dto, MultipartFile files, HttpSession session) throws Exception {
+		session.getServletContext();
+		int result = service.join(dto, files, session);
 
 		String path = "commons/message";
 		if (result > 0) {

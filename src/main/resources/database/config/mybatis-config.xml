@@ -14,6 +14,8 @@
   		<typeAlias type="com.goodee.app.boards.notice.NoticeDTO" alias="NoticeDTO"/>	  			
   		<typeAlias type="com.goodee.app.boards.qna.QnaDTO" alias="QnaDTO"/>		
   		<typeAlias type="com.goodee.app.util.Pager" alias="Pager"/>		
+  		<typeAlias type="com.goodee.app.files.FileDTO" alias="FileDTO"/>		
+  		<typeAlias type="com.goodee.app.member.MemberFileDTO" alias="MemberFileDTO"/>		
   	</typeAliases>
   
   

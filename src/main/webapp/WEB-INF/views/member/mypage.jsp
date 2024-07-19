@@ -22,6 +22,12 @@
 	<h3>${dto.user_email }</h3>
 	<h3>${dto.user_phone }</h3>
 	<h3>${dto.user_address }</h3>
+	
+	<div>
+		<c:if test="${not empty dto.memberFileDTO }">
+			<img alt="" src="/resources/upload/members/${dto.memberFileDTO.file_name }">
+		</c:if>
+	</div>
 
 	<div>
 		<h3>계좌정보</h3>

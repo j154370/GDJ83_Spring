@@ -20,7 +20,7 @@
 						<h1>회원 정보 입력 페이지</h1>
 					</div>
 					<div class="row">
-						<form action="/member/join" method="post" id="frm">
+						<form action="/member/join" method="post" id="frm" enctype="multipart/form-data">
 							<div class="mb-3">
 								<label for="user_id" class="form-label">아이디</label> <input
 									type="text" class="form-control" id="user_id" name="user_id">

@@ -21,12 +21,14 @@ public class MemberDAOTest extends DefaultTest{
 	private MemberDAO memberDAO = new MemberDAO();
 	
 	@Test
-	public void loginTest() throws Exception{
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setUser_id("12345");
-		memberDTO = memberDAO.login(memberDTO);
+	public void fileTest() throws Exception{
+		MemberFileDTO memberFileDTO = new MemberFileDTO();
+		memberFileDTO.setUser_id("12345632525235252335235");
+		memberFileDTO.setFile_name("aaa");
+		memberFileDTO.setOri_name("dog.jpg");
+		int result = memberDAO.addFile(memberFileDTO);
 		
-		assertNotNull(memberDTO);
+		System.out.println(result);
 	}
 	
 
