@@ -35,9 +35,19 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", dto);	
 	}
 	
+	public Long getNum() throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE + "getNum");
+	}
+	
 	public int add(ProductDTO dto) throws Exception{
 		
 		return sqlSession.insert(NAMESPACE + "add", dto);
+	}
+	
+	public int addFile(ProductFileDTO productFileDTO) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE + "addFile", productFileDTO);
 	}
 	
 	public int delete(ProductDTO dto) throws Exception{
@@ -49,4 +59,5 @@ public class ProductDAO {
 		
 		return sqlSession.update(NAMESPACE + "update", dto);
 	}
+	
 }

@@ -44,7 +44,7 @@
   	</select>
   	
   	<insert id="add" parameterType="ProductDTO">
-  		INSERT INTO PRODUCT_INFO VALUES (PRODUCT_SEQ.NEXTVAL,#{product_name},#{product_rate},#{product_ex})
+  		INSERT INTO PRODUCT_INFO VALUES (#{product_num},#{product_name},#{product_rate},#{product_ex})
   	</insert>
   	
   	<delete id="delete" parameterType="ProductDTO">
@@ -55,6 +55,17 @@
   		UPDATE PRODUCT_INFO SET PRODUCT_NAME =#{product_name}, PRODUCT_RATE =#{product_rate}, PRODUCT_EX =#{product_ex}
   		WHERE PRODUCT_NUM = #{product_num}
   	</update>
+  	
+   	<!-- File Table에 집어넣을 insert쿼리문 -->
+   	<select id="getNum" resultType="Long">
+   		SELECT PRODUCT_SEQ.NEXTVAL FROM DUAL
+   	</select>
+   	
+  	<insert id="addFile" parameterType="ProductFileDTO">
+  		INSERT INTO
+  		PRODUCT_FILES (FILE_NUM, PRODUCT_NUM, FILE_NAME, ORI_NAME)
+		VALUES (FILES_SEQ.NEXTVAL, #{product_num}, #{file_name}, #{ori_name})
+  	</insert>
   	
  
   </mapper>

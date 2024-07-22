@@ -16,6 +16,7 @@
   		<typeAlias type="com.goodee.app.util.Pager" alias="Pager"/>		
   		<typeAlias type="com.goodee.app.files.FileDTO" alias="FileDTO"/>		
   		<typeAlias type="com.goodee.app.member.MemberFileDTO" alias="MemberFileDTO"/>		
+  		<typeAlias type="com.goodee.app.product.ProductFileDTO" alias="ProductFileDTO"/>		
   	</typeAliases>
   
   

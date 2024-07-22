@@ -2,11 +2,14 @@ package com.goodee.app.product;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.util.Pager;
 
@@ -47,8 +50,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(Model model, ProductDTO dto) throws Exception{
-		int result = service.add(dto);
+	public String add(Model model, ProductDTO dto, MultipartFile[] files, HttpSession session) throws Exception{
+		int result = service.add(dto, files, session);
 		
 		String path = "commons/message";
 		

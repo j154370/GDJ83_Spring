@@ -17,7 +17,7 @@
 				<!-- 기본 시작 -->
 				<div class="container">
 					<h1>Product Add</h1>
-					<form action="/product/add" method="post">
+					<form action="/product/add" method="post" enctype="multipart/form-data">
 
 						<div class="mb-3">
 							<label for="Product Name" class="form-label">Product Name</label>

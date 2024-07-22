@@ -2,16 +2,17 @@ package com.goodee.app.product;
 
 public class ProductDTO {
 	
-	private Integer product_num;	// 상품 번호, PK키
+	private Long product_num;	// 상품 번호, PK키
 	private String product_name;	// 상품 이름
 	private Double product_rate;	// 이자율
 	private String product_ex;		// 상품 설명
 	
 	
-	public Integer getProduct_num() {
+
+	public Long getProduct_num() {
 		return product_num;
 	}
-	public void setProduct_num(Integer product_num) {
+	public void setProduct_num(Long product_num) {
 		this.product_num = product_num;
 	}
 	public String getProduct_name() {
