@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.account.AccountDAO;
 import com.goodee.app.account.AccountDTO;
+import com.goodee.app.files.FileManager;
 
 @Service
 public class MemberService {
@@ -25,6 +26,9 @@ public class MemberService {
 	
 	@Autowired
 	private AccountDAO accountDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	private String name="members";
 	
@@ -41,23 +45,9 @@ public class MemberService {
 		// 1. 어디에 저장할 것인가 - 운영체제가 알고있는 경로
 		String path = servletContext.getRealPath("resources/upload/members");
 		
-		File file = new File(path);
-		
 		System.out.println(path);
 		
-		if(!file.exists()) {
-			file.mkdir();
-		}
-		
-		// 2. 파일명은 어떻게 할 것인가 - (1)라이브러리 사용
-		
-		String fileName = UUID.randomUUID().toString() + "_" + files.getOriginalFilename();
-		
-		// 3. HDD에 파일을 저장하는 단계 - (1)MultipartFile 사용
-		file = new File(file, fileName);
-		
-		files.transferTo(file);
-		
+		String fileName = fileManager.fileSave(path, files);
 		
 		MemberFileDTO memberFileDTO = new MemberFileDTO();
 		memberFileDTO.setUser_id(dto.getUser_id());

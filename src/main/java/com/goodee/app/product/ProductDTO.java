@@ -1,14 +1,23 @@
 package com.goodee.app.product;
 
+import java.util.List;
+
 public class ProductDTO {
 	
 	private Long product_num;	// 상품 번호, PK키
 	private String product_name;	// 상품 이름
 	private Double product_rate;	// 이자율
 	private String product_ex;		// 상품 설명
+	private List<ProductFileDTO> fileDTOs;
 	
 	
 
+	public List<ProductFileDTO> getFileDTOs() {
+		return fileDTOs;
+	}
+	public void setFileDTOs(List<ProductFileDTO> fileDTOs) {
+		this.fileDTOs = fileDTOs;
+	}
 	public Long getProduct_num() {
 		return product_num;
 	}

@@ -39,10 +39,27 @@
 		</where> 
   	</select>
 
-  	<select id="getDetail" resultType="ProductDTO" parameterType="ProductDTO">
-  		SELECT * FROM PRODUCT_INFO WHERE PRODUCT_NUM = #{product_num}
+  	<select id="getDetail" resultMap="getDetailResult" parameterType="ProductDTO">
+  		SELECT * FROM PRODUCT_INFO pi 
+			LEFT JOIN
+			PRODUCT_FILES pf 
+			ON pi.PRODUCT_NUM = pf.PRODUCT_NUM
+			WHERE pi.PRODUCT_NUM = #{product_num}
   	</select>
   	
+  	<resultMap type="ProductDTO" id="getDetailResult">
+  		<id column="PRODUCT_NUM" property="product_num" />
+  		<result column="PRODUCT_NAME" property="product_name"/>
+  		<result column="PRODUCT_RATE" property="product_rate"/>
+  		<result column="PRODUCT_EX" property="product_ex"/>
+  		<collection property="fileDTOs" javaType="java.util.List" ofType="ProductFileDTO">
+  			<id column="FILE_NUM" property="file_num"/>
+  			<result column="FILE_NAME" property="file_name"/>
+  			<result column="ORI_NAME" property="ori_name"/>
+  		</collection>
+  	</resultMap>
+  	
+  	<!-- file업로드 추가 이후 여기도 수정이 됐음 -->
   	<insert id="add" parameterType="ProductDTO">
   		INSERT INTO PRODUCT_INFO VALUES (#{product_num},#{product_name},#{product_rate},#{product_ex})
   	</insert>

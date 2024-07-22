@@ -79,7 +79,7 @@ public class NoticeController {
 		
 		model.addAttribute("dto", boardDTO);
 		
-		return "board/update";
+		return "board/add";
 		
 	}
 	

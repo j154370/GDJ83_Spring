@@ -45,6 +45,12 @@
 							value="${requestScope.dto.product_ex }" disabled>
 					</div>
 
+					<div>
+						<c:forEach items="${dto.fileDTOs }" var="f">
+							<a href="/resources/upload/products/${f.file_name }">${f.ori_name }</a>
+						</c:forEach>
+					</div>
+
 					<a type="button" class="btn btn-primary" href="/account/add?product_num=${requestScope.dto.product_num }">상품가입</a>
 					<a type="button" class="btn btn-danger" href="/product/delete?product_num=${requestScope.dto.product_num }">삭제</a>
 					<a type="button" class="btn btn-warning" href="/product/update?product_num=${requestScope.dto.product_num }">수정</a>

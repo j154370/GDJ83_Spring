@@ -70,7 +70,7 @@
 						<label for="" class="form-label">내용</label>
 						<input type="text"
 							class="form-control" id="" name=""
-							value="${dto.board_hit}" disabled>
+							value="${dto.board_contents}" disabled>
 					</div>
 
 

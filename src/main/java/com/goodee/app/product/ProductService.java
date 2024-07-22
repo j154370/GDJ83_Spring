@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodee.app.files.FileManager;
 import com.goodee.app.util.Pager;
 
 @Service
@@ -18,6 +19,11 @@ public class ProductService {
 
 	@Autowired
 	private ProductDAO dao;
+	
+	@Autowired
+	private FileManager fileManager;
+	
+	private String name="products";
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception{
 
@@ -52,23 +58,15 @@ public class ProductService {
 		
 		String path = servletContext.getRealPath("resources/upload/products");
 		System.out.println(path);
-		File file = new File(path);
 		
-		if(!file.exists()) {
-			file.mkdirs();
-		}
 		
-		// 2. 저장할 파일명 생성
+		// 2~3은 fileManager 클래스 호출
 		for(MultipartFile f : files) {	
 			if(f.isEmpty()) {
 				continue;
 			}
-			String fileName = UUID.randomUUID().toString();
-			fileName = fileName + "_" + f.getOriginalFilename();
 			
-			// 3. HDD에 파일 저장
-			File f2 = new File(file, fileName);
-			f.transferTo(f2);
+			String fileName = fileManager.fileSave(path, f);
 			
 			// 4. 파일 정보 db에 저장
 			ProductFileDTO productFileDTO = new ProductFileDTO();
