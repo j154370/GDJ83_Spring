@@ -72,6 +72,12 @@
 							class="form-control" id="" name=""
 							value="${dto.board_contents}" disabled>
 					</div>
+					
+					<div>
+						<c:forEach items="${dto.boardFileDTOs }" var="f">
+							<a href="/resources/upload/${board }/${f.file_name }">${f.ori_name }</a>
+						</c:forEach>
+					</div>
 
 
 <%-- 					<a type="button" class="btn btn-primary" href="/account/add?product_num=${requestScope.dto.product_num }">상품가입</a>

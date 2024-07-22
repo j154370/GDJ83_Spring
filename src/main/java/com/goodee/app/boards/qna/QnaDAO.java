@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.goodee.app.boards.BoardDAO;
 import com.goodee.app.boards.BoardDTO;
+import com.goodee.app.boards.BoardFileDTO;
+import com.goodee.app.boards.notice.NoticeFileDTO;
 import com.goodee.app.util.Pager;
 
 @Repository
@@ -42,6 +44,12 @@ public class QnaDAO implements BoardDAO{
 		return sqlSession.insert(NAMESPACE + "add", dto);
 	}
 	
+	@Override
+	public int addFile(BoardFileDTO boardFileDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE + "addFile", boardFileDTO);
+	}
+
 	@Override
 	public int update(BoardDTO dto) throws Exception {
 		

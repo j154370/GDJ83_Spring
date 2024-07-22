@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.goodee.app.boards.BoardDAO;
 import com.goodee.app.boards.BoardDTO;
+import com.goodee.app.boards.BoardFileDTO;
 import com.goodee.app.util.Pager;
 
 @Repository
@@ -35,13 +36,19 @@ public class NoticeDAO implements BoardDAO{
 		
 		return sqlSession.selectOne(NAMESPACE + "getDetail", dto);
 	}
-	
+
 	@Override
 	public int add(BoardDTO dto) throws Exception{
 		
 		return sqlSession.insert(NAMESPACE + "add", dto);
 	}
 	
+	@Override
+	public int addFile(BoardFileDTO boardFileDTO) throws Exception {
+		
+		return sqlSession.insert(NAMESPACE + "addFile", boardFileDTO);
+	}
+
 	@Override
 	public int delete(BoardDTO dto) throws Exception{
 		

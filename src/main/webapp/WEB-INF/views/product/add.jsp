@@ -41,7 +41,6 @@
 							<button type="button" id="add" class = "btn btn-primary">파일 추가</button>
 						</div>
 						<div id="result">
-
 						</div>
 
 						<button type="submit" class="btn btn-primary">등록</button>

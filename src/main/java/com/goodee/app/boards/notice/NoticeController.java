@@ -3,12 +3,15 @@ package com.goodee.app.boards.notice;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.boards.BoardDTO;
 import com.goodee.app.util.Pager;
@@ -55,9 +58,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(NoticeDTO dto, Model model) throws Exception{
+	public String add(NoticeDTO dto, Model model, MultipartFile[] files, HttpSession session) throws Exception{
 		
-		int result = service.add(dto);
+		int result = service.add(dto, files, session);
 		
 		model.addAttribute("dto", dto);
 		

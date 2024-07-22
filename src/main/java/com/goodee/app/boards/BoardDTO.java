@@ -1,6 +1,7 @@
 package com.goodee.app.boards;
 
 import java.sql.Date;
+import java.util.List;
 
 public class BoardDTO {
 
@@ -13,8 +14,18 @@ public class BoardDTO {
 	private String board_contents;
 	private String board_category;
 	private Integer del;
+	private List<BoardFileDTO> boardFileDTOs;
 	
-	
+
+
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
+	}
+
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
+	}
+
 	public Integer getDel() {
 		if(this.del == null) {
 			this.del = 0;

@@ -1,5 +1,8 @@
 package com.goodee.app.boards.notice;
 
-public class NoticeFileDTO {
+import com.goodee.app.boards.BoardFileDTO;
+
+public class NoticeFileDTO extends BoardFileDTO{
+	
 
 }

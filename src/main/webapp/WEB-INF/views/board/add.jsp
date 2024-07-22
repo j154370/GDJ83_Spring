@@ -17,7 +17,7 @@
 				<!--  -->
 				<div class="container">
 					<h1>${board} Add</h1>
-					<form method="post">
+					<form method="post" enctype="multipart/form-data">
 					<input type="hidden" value="${requestScope.dto.board_num}" name="board_num">
 						<div class="mb-3">
 							<label for="board_writer" class="form-label">작성자</label>
@@ -34,6 +34,12 @@
 							</textarea>
 						</div>
 						
+						<div class="mb-3">
+							<button type="button" id="add" class = "btn btn-primary">파일 추가</button>
+						</div>
+						<div id="result">
+						</div>
+						
 						
 						<button type="submit" class="btn btn-primary">등록</button>
 						<a href="./list" class = "btn btn-danger">취소</a>
@@ -47,5 +53,10 @@
 			<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 		</div>
 	</div>
+	
+	<script src="/resources/js/commons/files.js"></script>
+	<script>
+		setMax(5);
+	</script>
 </body>
 </html>

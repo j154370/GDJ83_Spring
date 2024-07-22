@@ -2,6 +2,7 @@ package com.goodee.app.boards;
 
 import java.util.List;
 
+import com.goodee.app.boards.notice.NoticeFileDTO;
 import com.goodee.app.util.Pager;
 
 public interface BoardDAO {
@@ -16,6 +17,8 @@ public interface BoardDAO {
 	BoardDTO getDetail(BoardDTO dto) throws Exception;
 	
 	int add(BoardDTO dto) throws Exception;
+	
+	int addFile(BoardFileDTO boardFileDTO) throws Exception;
 	
 	int update(BoardDTO dto) throws Exception;
 	

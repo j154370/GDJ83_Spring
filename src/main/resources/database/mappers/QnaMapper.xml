@@ -41,34 +41,59 @@
   		<include refid="searchSql"></include>
   	</select>
   	
-  	<select id="getDetail" resultType="QnaDTO" parameterType="QnaDTO">
-  		SELECT * FROM QNA
-			WHERE BOARD_NUM = #{board_num} AND DEL=0
+  	<select id="getDetail" resultMap="getDetailResult" parameterType="QnaDTO">
+  		SELECT * FROM QNA q 
+			LEFT JOIN
+			QNA_FILES qf 
+			ON q.BOARD_NUM = qf.BOARD_NUM
+			WHERE q.BOARD_NUM = #{board_num}
   	</select>
   	
+  	<resultMap type="QnaDTO" id="getDetailResult">
+  		<id column="BOARD_NUM" property="board_num" />
+  		<result column="BOARD_WRITER" property="board_writer"/>
+  		<result column="BOARD_TITLE" property="board_title"/>
+  		<result column="CREATE_DATE" property="create_date"/>
+  		<result column="UPDATE_DATE" property="update_date"/>
+  		<result column="BOARD_HIT" property="board_hit"/>
+  		<result column="BOARD_CONTENTS" property="board_contents"/>
+  		<result column="BOARD_CATEGORY" property="board_category"/>
+  		<collection property="boardFileDTOs" javaType="java.util.List" ofType="BoardFileDTO">
+  			<id column="FILE_NUM" property="file_num"/>
+  			<result column="FILE_NAME" property="file_name"/>
+  			<result column="ORI_NAME" property="ori_name"/>
+  		</collection>
+  	</resultMap>
+  	
   	<insert id="add" parameterType="QnaDTO">
+  		<selectKey order="BEFORE" resultType="Long" keyProperty="board_num">
+  			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
   		INSERT INTO QNA
   		(
   			BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE,
-  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH, DEL
   		)
 		VALUES
 		(
-		BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE,
-		0, #{board_contents}, 'Q', BOARD_SEQ.CURRVAL, 0, 0
+		#{board_num}, #{board_title}, #{board_writer}, SYSDATE, SYSDATE,
+		0, #{board_contents}, 'Q', #{board_num}, 0, 0, 0
 		)
   	</insert>
   	
   	<insert id="reply" parameterType="QnaDTO">
+<!--   		<selectKey order="BEFORE" resultType="Long" keyProperty="board_num">
+  			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey> -->
   		INSERT INTO QNA
   		(
   			BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE,
-  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH
+  			BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY, REF, STEP, DEPTH, DEL
   		)
 		VALUES
 		(
 		BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE,
-		0, #{board_contents}, 'Q', #{ref}, #{step}, #{depth}
+		0, #{board_contents}, 'Q', #{ref}, #{step}, #{depth}, 0
 		)
   	</insert>
   	
@@ -87,12 +112,15 @@
 			WHERE BOARD_NUM = #{board_num}
   	</update>
   	
-  <!-- 	<insert id="addHit" parameterType="QnaDTO">
-  		INSERT INTO QNA
-  		(BOARD_HIT)
-		VALUES
-		( #{board_hit + 1})
-  	</insert> -->
+
+
+	<!-- File Table에 집어넣을 insert 쿼리문 -->
+  	
+  	<insert id="addFile" parameterType="QnaFileDTO">
+  		INSERT INTO
+  		QNA_FILES (FILE_NUM, BOARD_NUM, FILE_NAME, ORI_NAME)
+		VALUES (FILES_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
+  	</insert>
   
   	
  

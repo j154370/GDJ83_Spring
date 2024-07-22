@@ -37,15 +37,37 @@
   		<include refid="searchSql"></include>
   	</select>
   	
-  	<select id="getDetail" resultType="NoticeDTO" parameterType="NoticeDTO">
-  		SELECT * FROM NOTICE 
-			WHERE BOARD_NUM = #{board_num}
+  	<select id="getDetail" resultMap="getDetailResult" parameterType="NoticeDTO">
+  		SELECT * FROM NOTICE n2
+			LEFT JOIN
+			NOTICE_FILES nf 
+			ON n2.BOARD_NUM = nf.BOARD_NUM
+			WHERE n2.BOARD_NUM = #{board_num}
   	</select>
   	
+  	<resultMap type="NoticeDTO" id="getDetailResult">
+  		<id column="BOARD_NUM" property="board_num" />
+  		<result column="BOARD_WRITER" property="board_writer"/>
+  		<result column="BOARD_TITLE" property="board_title"/>
+  		<result column="CREATE_DATE" property="create_date"/>
+  		<result column="UPDATE_DATE" property="update_date"/>
+  		<result column="BOARD_HIT" property="board_hit"/>
+  		<result column="BOARD_CONTENTS" property="board_contents"/>
+  		<result column="BOARD_CATEGORY" property="board_category"/>
+  		<collection property="boardFileDTOs" javaType="java.util.List" ofType="BoardFileDTO">
+  			<id column="FILE_NUM" property="file_num"/>
+  			<result column="FILE_NAME" property="file_name"/>
+  			<result column="ORI_NAME" property="ori_name"/>
+  		</collection>
+  	</resultMap>
+  	
   	<insert id="add" parameterType="NoticeDTO">
+  		<selectKey order="BEFORE" resultType="Long" keyProperty="board_num">
+  			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
   		INSERT INTO NOTICE
   		(BOARD_NUM, BOARD_TITLE, BOARD_WRITER, CREATE_DATE, UPDATE_DATE, BOARD_HIT, BOARD_CONTENTS, BOARD_CATEGORY)
-			VALUES (BOARD_SEQ.NEXTVAL, #{board_title}, #{board_writer}, SYSDATE, SYSDATE, 0, #{board_contents}, 'a')
+			VALUES (#{board_num}, #{board_title}, #{board_writer}, SYSDATE, SYSDATE, 0, #{board_contents}, 'a')
   	</insert>
   	
   	<delete id="delete" parameterType="NoticeDTO">
@@ -56,6 +78,16 @@
   		UPDATE NOTICE SET BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
 			WHERE BOARD_NUM = #{board_num}
   	</update>
+  	
+  	
+  	
+  	<!-- File Table에 집어넣을 insert 쿼리문 -->
+
+  	<insert id="addFile" parameterType="NoticeFileDTO">
+  		INSERT INTO
+  		NOTICE_FILES (FILE_NUM, BOARD_NUM, FILE_NAME, ORI_NAME)
+		VALUES (FILES_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
+  	</insert>
   
   	
  

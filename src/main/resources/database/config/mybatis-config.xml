@@ -17,6 +17,9 @@
   		<typeAlias type="com.goodee.app.files.FileDTO" alias="FileDTO"/>		
   		<typeAlias type="com.goodee.app.member.MemberFileDTO" alias="MemberFileDTO"/>		
   		<typeAlias type="com.goodee.app.product.ProductFileDTO" alias="ProductFileDTO"/>		
+  		<typeAlias type="com.goodee.app.boards.notice.NoticeFileDTO" alias="NoticeFileDTO"/>		
+  		<typeAlias type="com.goodee.app.boards.qna.QnaFileDTO" alias="QnaFileDTO"/>	
+  		<typeAlias type="com.goodee.app.boards.BoardFileDTO" alias="BoardFileDTO"/>	
   	</typeAliases>
   
   
