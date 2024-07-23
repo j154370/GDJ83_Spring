@@ -10,6 +10,7 @@ import com.goodee.app.boards.BoardDAO;
 import com.goodee.app.boards.BoardDTO;
 import com.goodee.app.boards.BoardFileDTO;
 import com.goodee.app.boards.notice.NoticeFileDTO;
+import com.goodee.app.files.FileDTO;
 import com.goodee.app.util.Pager;
 
 @Repository
@@ -71,6 +72,13 @@ public class QnaDAO implements BoardDAO{
 		
 		return sqlSession.update(NAMESPACE + "replyUpdate", qnaDTO);
 	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + "fileDetail", fileDTO);
+	}
+	
 	
 	
 	

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodee.app.files.FileDTO;
 import com.goodee.app.util.Pager;
 
 public interface BoardService {
@@ -20,5 +21,7 @@ public interface BoardService {
 	public int delete(BoardDTO dto)throws Exception;
 	
 	public int update(BoardDTO dto) throws Exception;
+	
+	FileDTO fileDetail(FileDTO fileDTO) throws Exception;
 
 }

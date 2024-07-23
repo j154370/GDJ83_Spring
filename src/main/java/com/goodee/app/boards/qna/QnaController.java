@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.boards.BoardDTO;
+import com.goodee.app.files.FileDTO;
 import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
 
@@ -107,6 +108,15 @@ public class QnaController {
 		int result = qnaService.reply(qnaDTO);
 		
 		return "redirect:./list";
+	}
+	
+	@GetMapping("fileDown")
+	public String fileDown(FileDTO fileDTO, Model model) throws Exception{
+		
+		fileDTO = qnaService.fileDetail(fileDTO);
+		model.addAttribute("file", fileDTO);
+		
+		return "fileDown";
 	}
 
 }

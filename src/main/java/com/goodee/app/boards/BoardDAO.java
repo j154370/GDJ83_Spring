@@ -3,6 +3,7 @@ package com.goodee.app.boards;
 import java.util.List;
 
 import com.goodee.app.boards.notice.NoticeFileDTO;
+import com.goodee.app.files.FileDTO;
 import com.goodee.app.util.Pager;
 
 public interface BoardDAO {
@@ -23,5 +24,8 @@ public interface BoardDAO {
 	int update(BoardDTO dto) throws Exception;
 	
 	int delete(BoardDTO dto) throws Exception;
+	
+	// fileDetail
+	FileDTO fileDetail(FileDTO fileDTO) throws Exception;
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.goodee.app.boards.BoardDTO;
 import com.goodee.app.boards.BoardFileDTO;
 import com.goodee.app.boards.BoardService;
+import com.goodee.app.files.FileDTO;
 import com.goodee.app.files.FileManager;
 import com.goodee.app.util.Pager;
 
@@ -100,6 +101,13 @@ public class QnaService implements BoardService{
 		qnaDTO.setDepth(parent.getDepth()+1);
 		return qnaDAO.reply(qnaDTO);
 	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		
+		return qnaDAO.fileDetail(fileDTO);
+	}
+	
 	
 	
 

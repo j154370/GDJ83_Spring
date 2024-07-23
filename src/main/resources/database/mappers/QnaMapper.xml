@@ -121,6 +121,11 @@
   		QNA_FILES (FILE_NUM, BOARD_NUM, FILE_NAME, ORI_NAME)
 		VALUES (FILES_SEQ.NEXTVAL, #{board_num}, #{file_name}, #{ori_name})
   	</insert>
+  	
+  	<select id="fileDetail" parameterType="FileDTO" resultType="FileDTO">
+  		SELECT * FROM QNA_FILES
+  		WHERE FILE_NUM = #{file_num}
+  	</select>
   
   	
  
