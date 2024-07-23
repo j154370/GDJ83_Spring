@@ -15,7 +15,7 @@
 			<div id="content">
 				<c:import url="/WEB-INF/views/template/topbar.jsp"></c:import>
 				<div class="container">
-					<h1>Product List</h1>
+					<h1>WISH LIST</h1>
 					<form action="/product/list" method="get"
 						class="row row-cols-lg-auto g-3 align-items-center">
 
@@ -27,7 +27,6 @@
 							</select> <input type="text" name="search" class="form-control"
 								id="inlineFormInputGroupUsername" placeholder="검색창..">
 							<button type="submit" class="btn btn-primary">검색하기</button>
-							<a href="add" class="btn btn-outline-primary">상품 등록</a>
 						</div>
 					</form>
 
@@ -35,19 +34,27 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
+								<th>
+									<input type="checkbox">
+								</th>
 								<th>Product Num</th>
 								<th>Product Name</th>
 								<th>Product Rate</th>
 								<th>Product Ex</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="dto">
 								<tr>
+									<td>
+										<input type="checkbox">
+									</td>
 									<td>${pageScope.dto.product_num}</td>
 									<td><a type="button" class="btn btn-outline-dark" style="width:300px;" href="/product/detail?product_num=${pageScope.dto.product_num }">${pageScope.dto.product_name }</a></td>
 									<td>${pageScope.dto.product_rate}</td>
 									<td>${pageScope.dto.product_ex}</td>
+									<td><button class="btn btn-outline-dark wishDelete" type="button" data-wish-id="${dto.product_num}">X</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -80,5 +87,6 @@
 		</div>
 		<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 	</div>
+	<script src="/resources/js/product/wishDelete.js"></script>
 </body>
 </html>

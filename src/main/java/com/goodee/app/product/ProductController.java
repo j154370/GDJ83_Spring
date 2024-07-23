@@ -7,10 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
 
 @Controller
@@ -19,6 +21,25 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
+	
+	@GetMapping("addWish")
+	public String addWish(Long product_num, HttpSession session, Model model) throws Exception{
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int result = service.addWish(product_num, memberDTO.getUser_id());
+		
+		model.addAttribute("msg", result);
+		
+		return "commons/result";
+	}
+	
+	@GetMapping("wishList")
+	public void wishList(HttpSession session, Model model) throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("dto");
+		List<ProductDTO> list = service.wishList(memberDTO);
+		model.addAttribute("list", list);
+	}
 	
 	@RequestMapping("list")
 	public void getList(Model model, Pager pager ) throws Exception{

@@ -63,8 +63,6 @@ public class FileDown extends AbstractView{
 		os.close();
 		fi.close();
 		
-		System.out.println("file download view");
-		
 	}
 	
 	

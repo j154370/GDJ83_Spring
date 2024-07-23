@@ -54,16 +54,21 @@
 					<a type="button" class="btn btn-primary" href="/account/add?product_num=${requestScope.dto.product_num }">상품가입</a>
 					<a type="button" class="btn btn-danger" href="/product/delete?product_num=${requestScope.dto.product_num }">삭제</a>
 					<a type="button" class="btn btn-warning" href="/product/update?product_num=${requestScope.dto.product_num }">수정</a>
+					<a type="button" class="btn btn-primary" href="#" id="addWish" data-product-id="${dto.product_num}">위시 리스트 추가</a>
 
 
 					<!-- 시작 -->
 
 					<!-- 기본 끝 -->
 				</div>
+				<div id="wishResult">
+
+				</div>
 				<c:import url="/WEB-INF/views/template/footer.jsp"></c:import>
 			</div>
 			<c:import url="/WEB-INF/views/template/footerScript.jsp"></c:import>
 		</div>
 	</div>
+	<script src="/resources/js/product/wish.js"></script>
 </body>
 </html>

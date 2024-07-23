@@ -1,7 +1,9 @@
 package com.goodee.app.product;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.files.FileManager;
+import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
 
 @Service
@@ -24,6 +27,22 @@ public class ProductService {
 	private FileManager fileManager;
 	
 	private String name="products";
+	
+	public int addWish(Long product_num, String user_id) throws Exception{
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("product_num", product_num);
+		map.put("user_id", user_id);
+		
+		return dao.addWish(map);
+		
+	}
+	
+	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception{
+		
+		return dao.wishList(memberDTO);
+	}
 	
 	public List<ProductDTO> getList(Pager pager) throws Exception{
 

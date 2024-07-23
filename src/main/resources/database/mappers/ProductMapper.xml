@@ -84,5 +84,22 @@
 		VALUES (FILES_SEQ.NEXTVAL, #{product_num}, #{file_name}, #{ori_name})
   	</insert>
   	
+  	<!-- 위시리스트에 상품 추가 -->
+  	<insert id="addWish" parameterType="java.util.Map">
+  		INSERT INTO
+  		WISHLIST
+  		VALUES (#{product_num}, #{user_id})
+  	</insert>
+  	
+  	<!-- 로그인한 회원의 위시리스트 목록 보기 -->
+  	<select id="wishList" parameterType="MemberDTO" resultType="ProductDTO">
+  		SELECT * FROM PRODUCT_INFO
+		WHERE PRODUCT_NUM IN (
+		(SELECT PRODUCT_NUM
+		FROM WISHLIST 
+		WHERE USER_ID = #{user_id}))
+  	</select>
+  	
+  	
  
   </mapper>
