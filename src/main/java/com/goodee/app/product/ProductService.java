@@ -36,7 +36,16 @@ public class ProductService {
 		map.put("user_id", user_id);
 		
 		return dao.addWish(map);
+	}
+	
+	public int deleteWishList(Long product_num, String user_id) throws Exception{
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("product_num", product_num);
+		map.put("user_id", user_id);
+		
+		return dao.deleteWishList(map);
 	}
 	
 	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception{

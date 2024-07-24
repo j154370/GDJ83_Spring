@@ -25,6 +25,11 @@ public class ProductDAO {
 		return sqlSession.insert(NAMESPACE + "addWish", map);
 	}
 	
+	public int deleteWishList(Map<String, Object> map) throws Exception{
+	
+		return sqlSession.delete(NAMESPACE + "deleteWishList", map);
+	}
+	
 	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception{
 		
 		return sqlSession.selectList(NAMESPACE + "wishList", memberDTO);
