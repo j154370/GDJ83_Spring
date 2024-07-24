@@ -38,14 +38,19 @@ public class ProductService {
 		return dao.addWish(map);
 	}
 	
-	public int deleteWishList(Long product_num, String user_id) throws Exception{
+	public int deleteWishList(Long[] product_num, String user_id) throws Exception{
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("product_num", product_num);
-		map.put("user_id", user_id);
-		
-		return dao.deleteWishList(map);
+		int result = 0;
+		for(Long p : product_num) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("product_num", p);
+			map.put("user_id", user_id);
+			
+			result =  dao.deleteWishList(map);
+		}
+		return result;
 	}
 	
 	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception{

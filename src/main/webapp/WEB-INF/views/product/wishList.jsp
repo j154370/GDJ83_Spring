@@ -31,11 +31,14 @@
 					</form>
 
 
+					<div>
+						<button type = "button" class="btn btn-primary" id="deleteAll">전체 삭제</button>
+					</div>
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>
-									<input type="checkbox">
+									<input type="checkbox" id="all">
 								</th>
 								<th>Product Num</th>
 								<th>Product Name</th>
@@ -48,7 +51,7 @@
 							<c:forEach items="${list}" var="dto">
 								<tr>
 									<td>
-										<input type="checkbox">
+										<input type="checkbox" class="ch" data-wish-id="${dto.product_num}">
 									</td>
 									<td>${pageScope.dto.product_num}</td>
 									<td><a type="button" class="btn btn-outline-dark" style="width:300px;" href="/product/detail?product_num=${pageScope.dto.product_num }">${pageScope.dto.product_name }</a></td>
