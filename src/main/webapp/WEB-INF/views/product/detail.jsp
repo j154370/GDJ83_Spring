@@ -56,6 +56,47 @@
 					<a type="button" class="btn btn-warning" href="/product/update?product_num=${requestScope.dto.product_num }">수정</a>
 					<a type="button" class="btn btn-primary" href="#" id="addWish" data-product-id="${dto.product_num}">위시 리스트 추가</a>
 
+					<!-- 댓글  -->
+					 <div>
+						<!-- <textarea id="commentContents">
+
+						</textarea>
+						<button id="commentButton">상품평</button>
+
+						 <div id="commentList"></div> -->
+
+						 <!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
+							상품평 입력
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<textarea class="form-control" id="commentContents" rows="3"></textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal" id="commentClose">취소</button>
+								<button type="button" class="btn btn-primary" data-id="${dto.product_num}" id="commentButton">저장</button>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div id="commentList">
+							
+						</div>
+					 </div>
+
 
 					<!-- 시작 -->
 
@@ -70,5 +111,6 @@
 		</div>
 	</div>
 	<script src="/resources/js/product/wish.js"></script>
+	<script src="/resources/js/commons/comment.js"></script>
 </body>
 </html>

@@ -5,6 +5,35 @@
   
   <mapper namespace="com.goodee.app.product.ProductDAO">
   
+  <delete id="commentDelete" parameterType="ProductCommentDTO">
+  	DELETE FROM COMMENTS
+ 		WHERE BOARD_NUM = #{board_num} 
+  </delete>
+  
+  <insert id="commentAdd" parameterType="ProductCommentDTO">
+  	INSERT INTO COMMENTS
+  	VALUES (PRODUCT_SEQ.NEXTVAL, #{board_contents}, #{board_writer}, #{product_num}, SYSDATE)
+  </insert>
+  
+  
+  <select id="commentTotalCount" resultType="Long" parameterType="ProductCommentPager">
+  	SELECT COUNT(BOARD_NUM) FROM COMMENTS
+  	WHERE PRODUCT_NUM=#{product_num}
+  </select>
+  
+  <select id="commentList" resultType="ProductCommentDTO" parameterType="ProductCommentPager">
+  	SELECT * FROM
+  	(
+  		SELECT ROWNUM R, C.* FROM
+  		(
+  			SELECT * FROM COMMENTS
+  			WHERE PRODUCT_NUM=#{product_num}
+  			ORDER BY BOARD_NUM DESC
+  		)C
+  	)
+  	WHERE R BETWEEN #{startRow} AND #{lastRow}
+  </select>
+  
   	<select id="getList" resultType="ProductDTO" parameterType="com.goodee.app.util.Pager">
   		SELECT * FROM 
 			(
@@ -102,7 +131,11 @@
   	
   	<delete id="deleteWishList" parameterType="java.util.Map">
   		DELETE WISHLIST
- 			WHERE PRODUCT_NUM = #{product_num} AND USER_ID = #{user_id}
+ 			WHERE USER_ID = #{user_id} AND
+ 			PRODUCT_NUM IN
+ 			<foreach collection="numbers" item="item" open="(" separator="," close=")">
+ 				#{item}
+ 			</foreach>
   	</delete>
   	
   	

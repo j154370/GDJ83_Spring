@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
+import com.goodee.app.util.ProductCommentPager;
 
 
 @Repository
@@ -18,6 +19,31 @@ public class ProductDAO {
 	private SqlSession sqlSession;
 	
 	private final String NAMESPACE="com.goodee.app.product.ProductDAO.";
+	
+	
+	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception{
+		
+		return sqlSession.delete(NAMESPACE + "commentDelete", productCommentDTO);
+	}
+	
+	
+	public Long commentTotalCount(ProductCommentPager productCommentPager) throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE + "commentTotalCount", productCommentPager);
+	}
+	
+	public List<ProductCommentDTO> commentList(ProductCommentPager productCommentPager)throws Exception{
+		
+		return sqlSession.selectList(NAMESPACE + "commentList", productCommentPager);
+	}
+	
+	
+	public int commentAdd(ProductCommentDTO productCommentDTO) throws Exception{
+		
+		System.out.println(productCommentDTO.getBoard_contents());
+		
+		return	sqlSession.insert(NAMESPACE + "commentAdd", productCommentDTO); 
+	}
 	
 	
 	public int addWish(Map<String, Object> map) throws Exception{

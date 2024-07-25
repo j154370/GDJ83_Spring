@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.goodee.app.files.FileManager;
 import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
+import com.goodee.app.util.ProductCommentPager;
 
 @Service
 public class ProductService {
@@ -27,6 +28,27 @@ public class ProductService {
 	private FileManager fileManager;
 	
 	private String name="products";
+	
+	
+	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception{
+		
+		return dao.commentDelete(productCommentDTO);
+	}
+	
+	
+	public List<ProductCommentDTO> commentList(ProductCommentPager productCommentPager)throws Exception{
+		
+		productCommentPager.makeRow();
+		productCommentPager.makeNum(dao.commentTotalCount(productCommentPager));
+		
+		return dao.commentList(productCommentPager);
+	}
+	
+	
+	public int commentAdd(ProductCommentDTO productCommentDTO) throws Exception{
+		
+		return	dao.commentAdd(productCommentDTO); 
+	}
 	
 	public int addWish(Long product_num, String user_id) throws Exception{
 		
@@ -41,15 +63,12 @@ public class ProductService {
 	public int deleteWishList(Long[] product_num, String user_id) throws Exception{
 		
 		int result = 0;
-		for(Long p : product_num) {
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("product_num", p);
-			map.put("user_id", user_id);
-			
-			result =  dao.deleteWishList(map);
-		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user_id", user_id);
+		map.put("numbers", product_num);
+
+		result =  dao.deleteWishList(map);
+	
 		return result;
 	}
 	

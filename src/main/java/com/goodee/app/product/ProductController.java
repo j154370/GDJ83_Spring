@@ -7,13 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.app.member.MemberDTO;
 import com.goodee.app.util.Pager;
+import com.goodee.app.util.ProductCommentPager;
 
 @Controller
 @RequestMapping("/product/*")
@@ -21,6 +24,43 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
+	
+	
+	@PostMapping("commentDelete")
+	public String commentDelete(ProductCommentDTO productCommentDTO, Model model) throws Exception{
+		
+		int result = service.commentDelete(productCommentDTO);
+		
+		model.addAttribute("msg", result);
+		
+		return "commons/result";
+	}
+	
+	
+	
+	@GetMapping("commentList")
+	public void commentList(ProductCommentPager productCommentPager, Model model) throws Exception{
+		
+		List<ProductCommentDTO> list = service.commentList(productCommentPager);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pager", productCommentPager);
+		
+	}
+	
+	@PostMapping("commentAdd")
+	public String commentAdd(ProductCommentDTO productCommentDTO, HttpSession session, Model model) throws Exception{
+		
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("dto");
+		productCommentDTO.setBoard_writer(memberDTO.getUser_id());
+		
+		int result = service.commentAdd(productCommentDTO);
+		
+		model.addAttribute("msg", result);
+		
+		return "commons/result";
+	}
+	
 	
 	@GetMapping("addWish")
 	public String addWish(Long product_num, HttpSession session, Model model) throws Exception{
