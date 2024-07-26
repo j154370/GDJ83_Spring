@@ -2,6 +2,7 @@ const commentContents = document.getElementById("commentContents");
 const commentButton = document.getElementById("commentButton");
 const commentClose = document.getElementById("commentClose");
 const commentList = document.getElementById("commentList");
+const openModal = document.getElementById("openModal");
 
 
 //함수 호출
@@ -49,33 +50,71 @@ commentList.addEventListener("click", (e)=>{
     }
 })
 
+let flag = true;  //true라면 댓글을 등록하는 거고, false라면 댓글을 수정하는것으로 인식
+let board_num = 0;
+// 댓글 수정 버튼 코드
+commentList.addEventListener("click", (e)=>{
+    if(e.target.classList.contains("ups")){
+        flag = false;
+        board_num = e.target.getAttribute("data-del-id");
+        let c = e.target.getAttribute("data-update-con");
+        c = document.getElementById(c).innerHTML;
+        commentContents.value = c;
+        commentButton.innerHTML = "수정";
+    }
+})
+
+// 댓글 등록 버튼을 눌렀을 때 수정 버튼이 아니라 등록 버튼이 나오게 하는 코드
+openModal.addEventListener("click", ()=>{
+    flag = true;
+    commentButton.innerHTML = "등록";
+    commentContents.value = "";
+})
 
 
 
 
-// 댓글 추가 코드
+
+// 댓글 추가와 수정을 같이 하는 코드
 commentButton.addEventListener("click", ()=>{
-    commentClose.click();
+    
     let contents = commentContents.value;
 
+    if(contents==null || contents==""){
+        alert("댓글을 입력하세요");
+        return;
+    }
 
-    fetch("./commentAdd", {
-        method:"POST",
-        headers :{
-        "Content-type" : "application/x-www-form-urlencoded"
-        },
-        body:"board_contents="+contents+"&product_num="+commentButton.getAttribute("data-id")
-    })
-    .then(r=>r.text())
-    .then(r=>{
-        r=r.trim();
-        if(r>0){
-            alert("댓글 추가 성공");
-            getList(1);
-        }else{
-            alert("댓글 추가 실패");
-        }
-    })
+    let url = "commentAdd";
+    let param = "board_contents=" + contents + "&product_num=" + commentButton.getAttribute("data-id");
+    
+    if(!flag){
+        url = "commentUpdate";
+        param = "board_contents=" + contents + "&board_num=" + board_num;
+    }
+
+    console.log(url); 
+    console.log(param); 
+
+    commentClose.click();
+
+    // fetch(url, {
+    //     method:"POST",
+    //     headers :{
+    //     "Content-type" : "application/x-www-form-urlencoded"
+    //     },
+    //     body:param
+    // })
+    // .then(r=>r.text())
+    // .then(r=>{
+    //     r=r.trim();
+    //     if(r>0){
+    //         alert("댓글 추가 성공");
+    //         getList(1);
+    //     }else{
+    //         alert("댓글 추가 실패");
+    //     }
+    // })
 
     commentContents.value="";
 })

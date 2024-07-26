@@ -26,16 +26,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list}" var="comment">
+							<c:forEach items="${list}" var="comment" varStatus="i">
 								<tr>
 									<td>${comment.board_num}</td>
 									<td>${comment.board_writer}</td>
-									<td>${comment.board_contents}</td>
+									<td id="con${i.index}">${comment.board_contents}</td>
 									<td>${comment.create_date}</td>
 									<td>${comment.product_num}</td>
 									<td>
 										<c:if test="${comment.board_writer eq dto.user_id}">
 											<button type="button" class="del" data-del-id="${comment.board_num}">X</button>
+										</c:if>
+									</td>
+									<td>
+										<c:if test="${comment.board_writer eq dto.user_id}">
+											<button class="btn btn-primary ups" data-del-id="${comment.board_num}"
+											data-toggle="modal" data-target="#commentModal"
+											data-update-con="con${i.index}">수정</button>
 										</c:if>
 									</td>
 								</tr>

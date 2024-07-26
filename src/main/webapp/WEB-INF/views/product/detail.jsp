@@ -66,7 +66,7 @@
 						 <div id="commentList"></div> -->
 
 						 <!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
+						<button type="button" id="openModal" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
 							상품평 입력
 						</button>
 						
