@@ -30,6 +30,12 @@ public class ProductService {
 	private String name="products";
 	
 	
+	public int commentUpdate(ProductCommentDTO productCommentDTO) throws Exception{
+		
+		return dao.commentUpdate(productCommentDTO);
+	}
+	
+	
 	public int commentDelete(ProductCommentDTO productCommentDTO) throws Exception{
 		
 		return dao.commentDelete(productCommentDTO);

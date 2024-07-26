@@ -26,6 +26,17 @@ public class ProductController {
 	private ProductService service;
 	
 	
+	
+	@PostMapping("commentUpdate")
+	public String commentUpdate(ProductCommentDTO productCommentDTO, Model model) throws Exception{
+		
+		int result = service.commentUpdate(productCommentDTO);
+		
+		model.addAttribute("msg", result);
+		
+		return "commons/result";
+	}
+	
 	@PostMapping("commentDelete")
 	public String commentDelete(ProductCommentDTO productCommentDTO, Model model) throws Exception{
 		

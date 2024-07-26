@@ -5,6 +5,11 @@
   
   <mapper namespace="com.goodee.app.product.ProductDAO">
   
+  <update id="commentUpdate" parameterType="ProductCommentDTO">
+  	UPDATE COMMENTS SET BOARD_CONTENTS = #{board_contents}
+		WHERE BOARD_NUM = #{board_num}
+  </update>
+  
   <delete id="commentDelete" parameterType="ProductCommentDTO">
   	DELETE FROM COMMENTS
  		WHERE BOARD_NUM = #{board_num} 

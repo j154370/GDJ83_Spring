@@ -86,35 +86,38 @@ commentButton.addEventListener("click", ()=>{
     }
 
     let url = "commentAdd";
-    let param = "board_contents=" + contents + "&product_num=" + commentButton.getAttribute("data-id");
+
+    const form = new FormData();
+    form.append("board_contents", contents); // <input type="text" name="board_contents", value="contents"값
+    form.append("product_num", commentButton.getAttribute("data-id"));
+    form.append("board_num", board_num);
+
+    //let param = "board_contents=" + contents + "&product_num=" + commentButton.getAttribute("data-id");
     
     if(!flag){
         url = "commentUpdate";
-        param = "board_contents=" + contents + "&board_num=" + board_num;
+        //param = "board_contents=" + contents + "&board_num=" + board_num;
     }
-
-    console.log(url); 
-    console.log(param); 
 
     commentClose.click();
 
-    // fetch(url, {
-    //     method:"POST",
-    //     headers :{
-    //     "Content-type" : "application/x-www-form-urlencoded"
-    //     },
-    //     body:param
-    // })
-    // .then(r=>r.text())
-    // .then(r=>{
-    //     r=r.trim();
-    //     if(r>0){
-    //         alert("댓글 추가 성공");
-    //         getList(1);
-    //     }else{
-    //         alert("댓글 추가 실패");
-    //     }
-    // })
+    fetch(url, {
+        method:"POST",
+        // headers :{
+        // "Content-type" : "application/x-www-form-urlencoded"
+        // },
+        body:form
+    })
+    .then(r=>r.text())
+    .then(r=>{
+        r=r.trim();
+        if(r>0){
+            alert("댓글 추가 성공");
+            getList(1);
+        }else{
+            alert("댓글 추가 실패");
+        }
+    })
 
     commentContents.value="";
 })
