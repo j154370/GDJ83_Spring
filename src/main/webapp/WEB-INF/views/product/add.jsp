@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/header_css.jsp"></c:import>
+<c:import url="/WEB-INF/views/template/summer.jsp"></c:import>
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -33,8 +34,10 @@
 
 						<div class="mb-3">
 							<label for="Product Ex" class="form-label">Product Ex</label>
-							<input type="text" class="form-control" id="Product Ex"
-								name="product_ex">
+							<!-- <input type="text" class="form-control" id="Product_Ex"
+								name="product_ex"> -->
+							<textarea rows="" cols="" class="form-control" id="product_ex"
+							name="product_ex"></textarea>
 						</div>
 
 						<div class="mb-3">
@@ -57,6 +60,7 @@
 	<script src="/resources/js/commons/files.js"></script>
 	<script>
 		setMax(5);
+		$('#product_ex').summernote();
 	</script>
 </body>
 </html>
